@@ -7,7 +7,6 @@ package enfants;
 
 import java.awt.FlowLayout;
 import java.awt.Insets;
-import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -34,12 +33,13 @@ public class MainCalcul {
         JPanel operation = new JPanel(new FlowLayout());
 //        BoxLayout boxlayout = new BoxLayout(operation, BoxLayout.LINE_AXIS);
 //        operation.setLayout(boxlayout);
-//        operation.setBorder(new EmptyBorder(new Insets(150, 200, 150, 200)));
+       operation.setBorder(new EmptyBorder(new Insets(50, 200, 50, 200)));
 
         Random r = new Random();
         int n = r.nextInt(10);
         int p = r.nextInt(10);
         String[]operande = {"+","-"};
+        
        
         JLabel label = new JLabel(Integer.toString(n));
         String op = operande[r.nextInt(operande.length)];
@@ -60,7 +60,7 @@ public class MainCalcul {
         JPanel choix = new JPanel(new FlowLayout());
         BoxLayout boxlayout3 = new BoxLayout(choix, BoxLayout.LINE_AXIS);
         choix.setLayout(boxlayout3);
-        choix.setBorder(new EmptyBorder(new Insets(150, 200, 150, 200)));
+        choix.setBorder(new EmptyBorder(new Insets(100, 200, 50, 200)));
 
       
         
