@@ -57,7 +57,7 @@ private Integer niveau;
 
     @Override
     public String toString() {
-        return "Question " + "id=" + id + ", question=" + question + ", reponse=" + reponse + ", niveau=" + niveau;
+        return "id=" + id + ", question=" + question + ", reponse=" + reponse + ", niveau=" + niveau;
     }
     
 

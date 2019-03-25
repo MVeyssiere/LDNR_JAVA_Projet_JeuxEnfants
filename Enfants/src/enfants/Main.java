@@ -5,8 +5,8 @@
  */
 package enfants;
 
-import Connection.SQLConnection;
-import java.sql.Connection;
+import Beans.Question;
+import DAO.DAOQuestion;
 
 /**
  *
@@ -19,8 +19,11 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println("ca marche ?");
-        Connection connection = SQLConnection.getInstance();
+        DAOQuestion daop = new DAOQuestion();
+         for(Question p : daop.findAll())
+        {
+            System.out.println("p = " + p);
+      }
     }
 
 }
