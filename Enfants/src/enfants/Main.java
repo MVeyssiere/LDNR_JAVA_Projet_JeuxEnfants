@@ -5,6 +5,9 @@
  */
 package enfants;
 
+import Connection.SQLConnection;
+import java.sql.Connection;
+
 /**
  *
  * @author Amine Semmoud
@@ -17,6 +20,7 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.println("ca marche ?");
+        Connection connection = SQLConnection.getInstance();
     }
 
 }
