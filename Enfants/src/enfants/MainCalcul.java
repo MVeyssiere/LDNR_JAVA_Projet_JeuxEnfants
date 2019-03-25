@@ -7,9 +7,11 @@ package enfants;
 
 import java.awt.FlowLayout;
 import java.awt.Insets;
+import java.util.Random;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -32,17 +34,19 @@ public class MainCalcul {
 //        BoxLayout boxlayout = new BoxLayout(operation, BoxLayout.LINE_AXIS);
 //        operation.setLayout(boxlayout);
 //        operation.setBorder(new EmptyBorder(new Insets(150, 200, 150, 200)));
-            
-        JButton jb1 = new JButton("0-9");
-        JButton jb2 = new JButton("+ -");
-        JButton jb3 = new JButton("0-9");
+
+        Random r = new Random();
+        int n = r.nextInt(10);
+        int p = r.nextInt(10);
         
-        operation.add(jb1);
-        operation.add(jb2);
-        operation.add(jb3);
-       
-        
-      
+        JLabel label = new JLabel(Integer.toString(n));
+        JLabel label2 = new JLabel("opérande");
+        JLabel label3= new JLabel(Integer.toString(p));       
+		
+        operation.add(label);
+        operation.add(label2);
+        operation.add(label3);
+     
         
         JPanel solution = new JPanel(new FlowLayout());
         JTextField textField = new JTextField();
