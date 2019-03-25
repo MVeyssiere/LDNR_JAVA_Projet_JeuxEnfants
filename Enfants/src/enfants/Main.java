@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package enfants;
 
 /**
  *
- * @author Expression Amine is undefined on line 12, column 14 in Templates/Classes/Main.java.
+ * @author Amine Semmoud
  */
 public class Main {
 
