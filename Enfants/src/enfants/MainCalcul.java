@@ -7,6 +7,7 @@ package enfants;
 
 import java.awt.FlowLayout;
 import java.awt.Insets;
+import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -38,9 +39,11 @@ public class MainCalcul {
         Random r = new Random();
         int n = r.nextInt(10);
         int p = r.nextInt(10);
-        
+        String[]operande = {"+","-"};
+       
         JLabel label = new JLabel(Integer.toString(n));
-        JLabel label2 = new JLabel("opérande");
+        String op = operande[r.nextInt(operande.length)];
+        JLabel label2 = new JLabel(op);
         JLabel label3= new JLabel(Integer.toString(p));       
 		
         operation.add(label);
