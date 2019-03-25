@@ -36,15 +36,15 @@ public class MainCalcul {
        operation.setBorder(new EmptyBorder(new Insets(50, 200, 50, 200)));
 
         Random r = new Random();
-        int n = r.nextInt(10);
-        int p = r.nextInt(10);
+        int a = r.nextInt(10);
+        int b = r.nextInt(10);
         String[]operande = {"+","-"};
         
        
-        JLabel label = new JLabel(Integer.toString(n));
+        JLabel label = new JLabel(Integer.toString(a));
         String op = operande[r.nextInt(operande.length)];
         JLabel label2 = new JLabel(op);
-        JLabel label3= new JLabel(Integer.toString(p));       
+        JLabel label3= new JLabel(Integer.toString(b));       
 		
         operation.add(label);
         operation.add(label2);
