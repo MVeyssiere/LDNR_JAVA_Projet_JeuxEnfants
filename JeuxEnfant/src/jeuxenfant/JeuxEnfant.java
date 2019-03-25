@@ -16,7 +16,7 @@ public class JeuxEnfant {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println("test");
+        System.out.println("test dcqsc");
     }
     
 }
