@@ -7,12 +7,16 @@ package enfants;
 
 import Beans.Question;
 import DAO.DAOQuestion;
+import java.util.Random;
 
 /**
  *
  * @author Amine Semmoud
  */
 public class Main {
+    
+    final static int MIN =1;
+    final static int MAX = 10;
 
     /**
      * @param args the command line arguments
@@ -20,7 +24,12 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
         DAOQuestion daop = new DAOQuestion();
-         for(Question p : daop.findAll())
+        int nombreAleatoire = MIN + (int)(Math.random() * ((MAX - MIN) + 1));
+         System.out.println("nombreAleatoire = " + nombreAleatoire);
+         int niveau = 1;
+           
+           
+         for(Question p : daop.findWithNiveau(1))
         {
             System.out.println("p = " + p);
       }

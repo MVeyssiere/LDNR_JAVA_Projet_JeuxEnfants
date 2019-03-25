@@ -135,6 +135,36 @@ public class DAOQuestion implements DAO<Question>{
     
        
     }
+       
+    /**
+     *
+     * @param niv
+     * @return
+     */
+    public List<Question> findWithNiveau(Integer niv)  {
+         ArrayList<Question> retObj = new ArrayList<>();
+        // faut faire attention aux espaces qui doivent entouré le nom de la table
+       String sql = "SELECT * FROM "+table+" WHERE niveau <="+niv;
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            // permet de trouver dans la base de données tous les lignes ayant l'id
+ 
+            // cette ensemble permet de récuperer tous les objets ayant le bon pstmt
+            ResultSet rs = pstmt.executeQuery();
+            
+                 while(rs.next()){
+                  retObj.add(new Question(rs.getInt("id_question"), 
+                            rs.getString("question"), 
+                            rs.getString("reponse"),
+                            rs.getInt("niveau")
+                                ));
+                }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOQuestion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return retObj;
+    
+    }
     
 
 }
