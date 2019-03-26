@@ -51,7 +51,7 @@ public int verifierdoublon(int niv)
     int MIN = 0;
     int MAX = 0;
     DAOQuestion daniv = new DAOQuestion();
-     ArrayList<Question> listQuest = new ArrayList<>();
+    ArrayList<Question> listQuest = new ArrayList<>();
      listQuest =  (ArrayList<Question>) daniv.findWithNiveau(niv);
      MAX = (listQuest.size())-1;
      System.out.println("MAX = " + MAX);

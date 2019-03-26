@@ -7,10 +7,13 @@
 package Graphique;
 
 import Beans.Question;
+import DAO.DAOQuestion;
+import enfants.JeuQuestion;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -24,7 +27,7 @@ import javax.swing.JTextField;
  *
  * @author Julien Modena
  */
-public class Visuel extends JFrame{
+public class Visuel extends JPanel{
 
   
 
@@ -33,8 +36,10 @@ public class Visuel extends JFrame{
      * @param q la question est passé en parametre pour être ajouter a mon conteneur
     
      */
-    public Visuel(Question q) {
-        
+    public Visuel() {
+        JFrame jf = new JFrame();
+        JeuQuestion test = new JeuQuestion();
+        Question f = test.poserquestion(1);
        JPanel bouton = new JPanel();
        JPanel global = new JPanel();
        JPanel reponse = new JPanel();
@@ -42,7 +47,7 @@ public class Visuel extends JFrame{
        global.setLayout(new BorderLayout());
        
           // ajout de la question a un JLabel pour l'afficher ensuite
-         String quest = q.getQuestion();
+         String quest = f.getQuestion();
          JLabel question = new JLabel(quest);
          
         // Gestion de la reponse
@@ -70,7 +75,7 @@ public class Visuel extends JFrame{
            public void actionPerformed(ActionEvent e) {
                String verif = rep.getText();
                verif.toLowerCase();
-               String reponsedb = q.getReponse();  String repo = reponsedb.toLowerCase();
+               String reponsedb = f.getReponse();  String repo = reponsedb.toLowerCase();
                
                if(verif.equals(repo))
                {
@@ -79,7 +84,7 @@ public class Visuel extends JFrame{
                }
                else{
                    JOptionPane.showMessageDialog(null, "Quel dommage !!! la bonne réponse était "
-                           +q.getReponse(),"Verification", JOptionPane.WARNING_MESSAGE);
+                           +f.getReponse(),"Verification", JOptionPane.WARNING_MESSAGE);
                }
            }
        });
@@ -87,14 +92,18 @@ public class Visuel extends JFrame{
            @Override
            public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "la solution de la reponse est  "
-                        +q.getReponse(), "Solution", JOptionPane.INFORMATION_MESSAGE);
+                        +f.getReponse(), "Solution", JOptionPane.INFORMATION_MESSAGE);
            }
        });
         
         autre.addActionListener(new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent e) {
-              
+               Question g = test.poserquestion(1);
+               String quest = g.getQuestion();
+               question.setText(quest);
+               content.add(question);
+               content.add(reponse);
                  
            }
        });
@@ -108,13 +117,13 @@ public class Visuel extends JFrame{
         // ajout des différents panel au panel général
         global.add(bouton,BorderLayout.SOUTH);
         global.add(content,BorderLayout.CENTER);
-        this.add(global);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Fermeture
-        this.setResizable(false); // Fenêtre non-redimensionnable
-        this.pack(); // Ajustement de la taille au contenu
+        jf.add(global);
+        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Fermeture
+        jf.setResizable(false); // Fenêtre non-redimensionnable
+        jf.pack(); // Ajustement de la taille au contenu
         // On positionne la fenêtre au milieu de l'écran
-        this.setLocationRelativeTo(null);
-        this.setVisible(true); // Affichage de la fenêtre
+        jf.setLocationRelativeTo(null);
+        jf.setVisible(true); // Affichage de la fenêtre
        
     }
 }
