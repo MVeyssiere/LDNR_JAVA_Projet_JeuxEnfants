@@ -8,7 +8,7 @@ package enfants;
 
 import Beans.Question;
 import DAO.DAOQuestion;
-import java.util.HashSet;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,75 +17,62 @@ import java.util.HashSet;
 
 public class JeuQuestion {
   
-      final static int MIN =1;
-      final static int MAX = 10;
+     
 
 
 public Question poserquestion(int niv)
 {
-       
+      
         Question ques = null;
         DAOQuestion daniv = new DAOQuestion();
+        ArrayList<Question> listQuest = new ArrayList<>();
+        listQuest =  (ArrayList<Question>) daniv.findWithNiveau(niv);
         int compteur= 0;
-        int aleat = verifierdoublon();
+        int aleat = verifierdoublon(niv);
          
         
-     for(Question q :daniv.findWithNiveau(niv))
+     for(Question q : listQuest)
      {
          if(aleat == compteur)
          {
              ques = q;
-             
+            listQuest.remove(q);
              break;
          }
         compteur = compteur+1;
          
      }
           return ques;
-    
+          
 }
 
-public int verifierdoublon()
+public int verifierdoublon(int niv)
 {
-    
+    int MIN = 0;
+    int MAX = 0;
+    DAOQuestion daniv = new DAOQuestion();
+     ArrayList<Question> listQuest = new ArrayList<>();
+     listQuest =  (ArrayList<Question>) daniv.findWithNiveau(niv);
+     MAX = (listQuest.size())-1;
+     System.out.println("MAX = " + MAX);
      int alea= 0;
-     HashSet<Integer> tirage = new HashSet<>();
      int nombreAleatoire = 0;
-         
-    
-      if(tirage.isEmpty())
-               {
-                   nombreAleatoire = MIN + (int)(Math.random() * ((MAX - MIN) + 1));
-                    System.out.println(nombreAleatoire);
-                    System.out.println("zob");
-                    
-                    alea = nombreAleatoire;
-                    tirage.add(alea);
-
-               }  
+         if(listQuest.isEmpty())
+         {
+                  String infoList = "La liste de question est vide";
+                  System.out.println("La liste de question est vide ");
+         }  
       
    else{
-          for(Integer i : tirage)
-              {
-            
-
-                while(i == nombreAleatoire)
-                {
+                  System.out.println("coucou");
                     nombreAleatoire = MIN + (int)(Math.random() * ((MAX - MIN) + 1));
-                    System.out.println("salut");
-                    System.out.println(nombreAleatoire);
-                }
-
                     alea = nombreAleatoire;
-                    System.out.println("al = " + alea);
-                    tirage.add(alea);
-                
-            
-            }
-     
+                    System.out.println("alea = " + alea);
+                   
+
         }
    
-       System.out.println("alea = " + alea);
+    
         return alea;
 }
 

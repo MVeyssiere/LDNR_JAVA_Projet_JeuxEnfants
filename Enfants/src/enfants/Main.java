@@ -6,6 +6,8 @@
 package enfants;
 
 import Beans.Question;
+import DAO.DAOQuestion;
+import Graphique.Visuel;
 
 /**
  *
@@ -21,18 +23,23 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
         JeuQuestion test = new JeuQuestion();
-        java.util.Scanner sc = new java.util.Scanner(System.in);
-//        System.out.println("saisir le niveau que vous souhaitez");
-//        int niveau = sc.nextInt();
-        for(int i =0; i<11;i++)
-        {
-            Question f = test.poserquestion(1);
-        System.out.println("f = " + f);
-            
-        }
+//        java.util.Scanner sc = new java.util.Scanner(System.in);
+////        System.out.println("saisir le niveau que vous souhaitez");
+////        int niveau = sc.nextInt();
+//        for(int i =0; i<11;i++)
+//        {
+//            
+//        System.out.println("f = " + f);
+//            
+//        }
         
-        
-        
+        Question f = test.poserquestion(1);
+        new Visuel(f);
+//            DAOQuestion daop = new DAOQuestion();
+//                    for(Question p : daop.findAll())
+//        {
+//            System.out.println("p = " + p);
+//        }
         
         
         

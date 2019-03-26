@@ -162,9 +162,10 @@ public class DAOQuestion implements DAO<Question>{
         } catch (SQLException ex) {
             Logger.getLogger(DAOQuestion.class.getName()).log(Level.SEVERE, null, ex);
         }
+      
         return retObj;
+    }
     
     }
     
 
-}
