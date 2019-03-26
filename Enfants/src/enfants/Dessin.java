@@ -7,44 +7,39 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JToolBar;
 
 /**
  * @author Marine Veyssiere
  */
-public class Dessin extends JFrame {
+public class Dessin extends JPanel {
 
     int x = 0, y = 0;
-    JPanel container = new JPanel();
+
     JLabel label = new JLabel();
     JPanel dessin = new JPanel();
     JPanel buttons = new JPanel();
     JPanel colorButtons = new JPanel();
     JPanel formButtons = new JPanel();
     JButton rouge, vert, bleu, carre, cercle, effacer;
+
     Color couleur = Color.BLACK; //initialisation de la couleur du stylo en noir.
     int shape = 0; // pour choisir la forme du stylo
 
     public Dessin() {
+
         dessin.setBackground(Color.white);
 
-        container.addMouseListener(new MyMouseMotionListener());
-        container.addMouseMotionListener(new MyMouseMotionListener());
+        this.addMouseListener(new MyMouseMotionListener());
+        this.addMouseMotionListener(new MyMouseMotionListener());
 
         // Création des bouttons
 //        JPanel buttons = new JPanel(new GridLayout(8, 1, 5, 5));
@@ -145,21 +140,14 @@ public class Dessin extends JFrame {
         buttons.add(effaceButtons);
         //Container pour placer les elements: la feuille de dessin et les boutons de choix de couleur du stylo
         setLabel(x, y);
-        container.setLayout(new BorderLayout());
-        container.add(label, BorderLayout.SOUTH);
-        container.add(dessin, BorderLayout.CENTER);
-        container.add(buttons, BorderLayout.EAST);
-
-        this.setTitle("Dessinons");
-        this.setSize(800, 800);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.setContentPane(container);
-        this.setVisible(true);
+        this.setLayout(new BorderLayout());
+        this.add(label, BorderLayout.SOUTH);
+        this.add(dessin, BorderLayout.CENTER);
+        this.add(buttons, BorderLayout.EAST);
     }
 
     private void setLabel(int x, int y) {
-        label.setText("x=" + x + "y=" + y);
+        label.setText("x = " + x + " y = " + y);
     }
 
     public class MyMouseMotionListener extends MouseAdapter {
@@ -187,7 +175,7 @@ public class Dessin extends JFrame {
         Graphics2D line = (Graphics2D) g;
         line.setColor(couleur);
         Cursor curseur = new Cursor(Cursor.HAND_CURSOR);
-        dessin.setCursor(curseur);
+        this.setCursor(curseur);
         // test pour mettre une image de stylo à la place du curseur
 //        Toolkit toolkit = getToolkit();
 //        Image cursorImage = new ImageIcon("ressources/Pencil.png").getImage();
@@ -206,5 +194,4 @@ public class Dessin extends JFrame {
                 break;
         }
     }
-
 }
