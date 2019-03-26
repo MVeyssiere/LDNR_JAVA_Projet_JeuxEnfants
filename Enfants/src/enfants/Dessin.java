@@ -2,32 +2,27 @@ package enfants;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
-import java.awt.Paint;
-import java.awt.PaintContext;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
-import java.awt.image.ColorModel;
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JToolBar;
 
 /**
  * @author Marine Veyssiere
@@ -62,6 +57,8 @@ public class Dessin extends JFrame {
 
         rouge = new JButton("Rouge");
         rouge.setBackground(Color.red);
+//        ImageIcon icon = new ImageIcon("ressources/Pencil.png", "");
+//        rouge.setIcon(new ImageIcon("ressources/rougeButton.png"));
         rouge.setFont(new Font("New Times Roman", Font.BOLD, 16));
         //Event: modification de la couleur du stylo après avoir cliqué sur le bouton
         rouge.addActionListener(new ActionListener() {
@@ -189,6 +186,15 @@ public class Dessin extends JFrame {
     public void paintComponent(Graphics g) {
         Graphics2D line = (Graphics2D) g;
         line.setColor(couleur);
+        Cursor curseur = new Cursor(Cursor.HAND_CURSOR);
+        dessin.setCursor(curseur);
+        // test pour mettre une image de stylo à la place du curseur
+//        Toolkit toolkit = getToolkit();
+//        Image cursorImage = new ImageIcon("ressources/Pencil.png").getImage();
+//        Point cursorHotSpot = new Point(dessin.getX(), dessin.getY());
+//        Cursor lightPenCursor = toolkit.createCustomCursor(cursorImage, cursorHotSpot, "lightPenCursor");
+//        this.setCursor(lightPenCursor); //Within a JPanel
+
         switch (shape) {
             case 1:
                 line.drawRect(x, y, 6, 6); //forme carrée
