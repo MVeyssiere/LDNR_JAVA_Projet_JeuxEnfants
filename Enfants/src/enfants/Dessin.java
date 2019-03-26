@@ -197,10 +197,10 @@ public class Dessin extends JFrame {
 
         switch (shape) {
             case 1:
-                line.drawRect(x, y, 6, 6); //forme carrée
+                line.drawRect(x, y, 15, 15); //forme carrée
                 break;
             case 2:
-                line.drawOval(x, y, 6, 6); //forme circulaire
+                line.drawOval(x, y, 15, 15); //forme circulaire
                 break;
             default:
                 break;
