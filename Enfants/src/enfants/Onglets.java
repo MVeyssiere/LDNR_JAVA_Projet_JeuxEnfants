@@ -2,6 +2,7 @@ package enfants;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -74,7 +75,16 @@ public class Onglets extends JFrame {
 
         ///////////////////////////////////////////////////////
         //Niveaux
-        niveau = new JPanel();
+        niveau = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                ImageIcon m = new ImageIcon(getClass().getResource("/Ressource/fond_niveaux.jpg"));
+                Image monImage = m.getImage();
+//                monImage.getScaledInstance(1000, 700, Image.SCALE_SMOOTH);
+                g.drawImage(monImage, 0, 0, 1300, 900, null);
+            }
+        };
         niveau.setLayout(null);
         niveau.setBackground(Color.YELLOW);
         JButton niv1 = new JButton("NIVEAU1");
@@ -83,17 +93,32 @@ public class Onglets extends JFrame {
         niveau.add(niv1);
         niveau.add(niv2);
         // emplacement des boutons
-        niv1.setBounds(10, 200, 150, 40);
-        niv2.setBounds(330, 200, 150, 40);
+        niv1.setBounds(350, 250, 200, 60);
+        niv2.setBounds(750, 250, 200, 60);
+        niv1.setBackground(Color.magenta);
+        niv2.setBackground(Color.magenta);
+        niv1.setForeground(Color.WHITE);
+        niv1.setFont(new Font("New Times Roman", Font.BOLD, 18));
+        niv2.setForeground(Color.WHITE);
+        niv2.setFont(new Font("New Times Roman", Font.BOLD, 18));
 
-        admin = new JPanel();
-        admin.setLayout(null);
-        admin.setBackground(Color.yellow);
+        admin = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                ImageIcon m = new ImageIcon(getClass().getResource("/Ressource/fond_admin.jpg"));
+                Image monImage = m.getImage();
+                g.drawImage(monImage, 0, 0, 1290, 700, null);
+            }
+        };
+        admin.setBackground(Color.lightGray);
         admin.setLayout(new FlowLayout());
 
         JLabel label = new JLabel("mot de passe");
+        label.setPreferredSize(new Dimension(80, 80));
         admin.add(label);
         JTextField textField = new JTextField();
+
         admin.add(textField);
         textField.setColumns(10); //On lui donne un nombre de colonnes à afficher
 

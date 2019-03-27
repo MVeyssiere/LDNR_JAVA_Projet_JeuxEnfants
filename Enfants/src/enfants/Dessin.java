@@ -2,6 +2,8 @@ package enfants;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -17,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 /**
  * @author Marine Veyssiere
@@ -49,18 +52,14 @@ public class Dessin extends JPanel {
         colors.add(chooseColor);
 
         // Création des bouttons
-//        JPanel buttons = new JPanel(new GridLayout(8, 1, 5, 5));
         BoxLayout buttonsLayout = new BoxLayout(buttons, BoxLayout.Y_AXIS);
         buttons.setLayout(buttonsLayout);
 
         GridLayout gridcolorButtons = new GridLayout(5, 1, 10, 10);
-//        BoxLayout colorButtonsLayout = new BoxLayout(colorButtons, BoxLayout.Y_AXIS);
         colorButtons.setLayout(gridcolorButtons);
 
         rouge = new JButton("Rouge");
         rouge.setBackground(Color.red);
-//        ImageIcon icon = new ImageIcon("ressources/Pencil.png", "");
-//        rouge.setIcon(new ImageIcon("ressources/rougeButton.png"));
         rouge.setFont(new Font("New Times Roman", Font.BOLD, 16));
         //Event: modification de la couleur du stylo après avoir cliqué sur le bouton
         rouge.addActionListener(new ActionListener() {
@@ -106,10 +105,10 @@ public class Dessin extends JPanel {
         });
         colorButtons.add(autre);
 
+        // bordure pour distinger les boutons couleurs des boutons formes ...
         colorButtons.setBorder(BorderFactory.createLineBorder(Color.BLUE, 1));
         colorButtons.setBorder(BorderFactory.createTitledBorder("Couleurs"));
 
-//        BoxLayout formButtonsLayout = new BoxLayout(formButtons, BoxLayout.Y_AXIS);
         GridLayout gridformButtons = new GridLayout(3, 1, 4, 4);
         formButtons.setLayout(gridformButtons);
 
@@ -160,6 +159,20 @@ public class Dessin extends JPanel {
         quitter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                e.getActionCommand();
+                Component source = (Component) e.getSource();
+                Container parent = source.getParent();// will give the container of the button
+                do {
+                    parent = parent.getParent();
+                } while (!(parent instanceof JTabbedPane));
+                JTabbedPane tabbedPane = (JTabbedPane) parent;
+                tabbedPane.setSelectedIndex(0);
+//                label.removeAll();
+//                dessin.removeAll();
+//                buttons.removeAll();
+//                parent.getClass();
+//                parent.getLayout();
+
 //                Onglets onglet = new Onglets();
             }
         });
