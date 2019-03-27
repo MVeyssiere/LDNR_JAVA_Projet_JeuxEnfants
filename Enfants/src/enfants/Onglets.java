@@ -155,7 +155,5 @@ public class Onglets extends JFrame {
         jf.setResizable(false);
         jf.setBackground(Color.WHITE);
         jf.setVisible(true);
-
     }
-
 }
