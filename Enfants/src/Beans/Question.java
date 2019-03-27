@@ -6,6 +6,8 @@
 
 package Beans;
 
+import enfants.JeuQuestion;
+
 /**
  *
  * @author Julien Modena
@@ -23,6 +25,17 @@ private Integer niveau;
         this.reponse = reponse;
         this.niveau = niveau;
     
+    }
+
+    public Question() {
+        Question f;
+        JeuQuestion test = new JeuQuestion();
+        f = test.poserquestion(1);
+        this.id = f.getId();
+        this.question = f.getQuestion();
+        this.reponse = f.getReponse();
+        this.niveau = f.getNiveau();
+        
     }
     
 

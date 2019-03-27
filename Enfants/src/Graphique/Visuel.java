@@ -11,12 +11,12 @@ import enfants.JeuQuestion;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -30,16 +30,19 @@ public class Visuel extends JPanel{
        JPanel global = new JPanel();
        JPanel bouton = new JPanel();
        JPanel reponse = new JPanel();
+       JLabel soluce = new JLabel();
+       
        Box content= new Box(BoxLayout.PAGE_AXIS);
         // Gestion de la reponse
         
         JLabel question = new JLabel(a);
         
                 // Creation des boutons
+        
         JButton verifier = new JButton("Verifier");
         JButton solution = new JButton("Solution");
         JButton autre = new JButton("Autre Question");
-        JeuQuestion test = new JeuQuestion();
+////        JeuQuestion test = new JeuQuestion();
         JTextField rep = new JTextField(30);
         JLabel ti = new JLabel("Réponse : ");
         
@@ -51,8 +54,8 @@ public class Visuel extends JPanel{
         
         initGUI();
            // Gestion de la reponse
-        reponse.setLayout(new GridLayout(0,2));
-       
+        reponse.setLayout(new GridLayout(3,0));
+        reponse.add(soluce);
         reponse.add(ti);
         reponse.add(rep);
 
@@ -65,23 +68,25 @@ public class Visuel extends JPanel{
         bouton.add(autre);
         
         // ajout des différents panel au panel général
-        global.add(bouton,BorderLayout.SOUTH);
+
         global.add(content,BorderLayout.CENTER);
+        global.add(bouton,BorderLayout.SOUTH);
         jf.add(global);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Fermeture
-        jf.setResizable(false); // Fenêtre non-redimensionnable
+        //jf.setResizable(false); // Fenêtre non-redimensionnable
         jf.pack(); // Ajustement de la taille au contenu
         // On positionne la fenêtre au milieu de l'écran
-        jf.setLocationRelativeTo(null);
+////        jf.setLocationRelativeTo(null);
         jf.setVisible(true); // Affichage de la fenêtre
        
     }
     private void initGUI(){
         
        
-        Question f = test.poserquestion(1);
-        System.out.println("f = " + f);
-        System.out.println("f = " + f.getReponse());
+        Question f = new Question();
+//        f = test.poserquestion(1);
+        System.out.println("f = " + f.toString());
+        
        
        
           // ajout de la question a un JLabel pour l'afficher ensuite
@@ -93,36 +98,65 @@ public class Visuel extends JPanel{
      
         
         // ajout des listener pour chaque bouton
-        verifier.addActionListener((ActionEvent e) -> {
-            String verif = rep.getText();
-            verif.toLowerCase();
-            String reponsedb = f.getReponse();
-            String repo = reponsedb.toLowerCase();
-            System.out.println("repo = " + repo);
-            System.out.println("f.getReponse() = " + f.getReponse());
-            
-            if(verif.equals(repo))
-            {
-                JOptionPane.showMessageDialog(null, "Bravo vous avez trouvé la bonne réponse "
-                        ,"Verification", JOptionPane.INFORMATION_MESSAGE);
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Quel dommage !!! la bonne réponse était "
-                        +f.getReponse(),"Verification", JOptionPane.WARNING_MESSAGE);
+        verifier.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String verif = rep.getText();
+                verif  = verif.toLowerCase();
+                String reponsedb = f.getReponse();
+                String repo ;
+                
+                if(isANumber(reponsedb)==true)
+                {
+                    repo = reponsedb;
+                }
+                else{
+                    repo = reponsedb.toLowerCase();
+                }
+                System.out.println("repo = " + repo);
+                System.out.println("f.getReponse() = " + f.getReponse());
+                
+                if(verif.equals(repo))
+                {
+                    soluce.setText("Bien Joué l'ami"+ f.getReponse());
+                    rep.setText(null);
+                }
+                else{
+                    soluce.setText("c'est dommagel'ami la solution était " + f.getReponse());
+                    f.setReponse(null);
+                    rep.setText(null);
+                }
             }
         });
         
         solution.addActionListener((ActionEvent e) -> {
-            JOptionPane.showMessageDialog(null, "la solution de la reponse est  "
-                    +f.getReponse(), "Solution", JOptionPane.INFORMATION_MESSAGE);
+            soluce.setText("T'aurais pu repondre la reponse etait "+ f.getReponse());
+            f.setReponse(null);
+            rep.setText(null);
+            
         });
         
         
         autre.addActionListener((ActionEvent e) -> {
+            rep.setText(null);
+            f.setReponse(null);
+            soluce.setText(null);
+            String reponsedb = null;
+            
+            reponsedb = f.getReponse();
+            System.out.println("reponsedb dans le autre = " + reponsedb);
             initGUI();
         });
         
    
         
+    }
+    public static boolean isANumber(String chaine){
+         try{              
+               Integer.parseInt(chaine);
+               return true;
+         }catch(NumberFormatException nfe){
+               return false;
+         }
     }
 }
