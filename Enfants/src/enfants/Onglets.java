@@ -2,34 +2,19 @@ package enfants;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
-import javax.swing.plaf.ColorUIResource;
 
 /**
  * @author Amine Semmoud
@@ -145,7 +130,6 @@ public class Onglets extends JFrame {
         jf.setResizable(false);
         jf.setBackground(Color.WHITE);
         jf.setVisible(true);
-
 
     }
 

@@ -14,9 +14,9 @@ import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import sun.java2d.Disposer;
 
 /**
  * @author Marine Veyssiere
@@ -30,24 +30,30 @@ public class Dessin extends JPanel {
     JPanel buttons = new JPanel();
     JPanel colorButtons = new JPanel();
     JPanel formButtons = new JPanel();
-    JButton rouge, vert, bleu, carre, cercle, effacer, quitter;
+    JButton rouge, vert, bleu, autre, carre, cercle, effacer, quitter;
 
     Color couleur = Color.BLACK; //initialisation de la couleur du stylo en noir.
     int shape = 0; // pour choisir la forme du stylo
 
     public Dessin() {
 
+        dessin.setSize(1300, 700);
         dessin.setBackground(Color.white);
 
         this.addMouseListener(new MyMouseMotionListener());
         this.addMouseMotionListener(new MyMouseMotionListener());
+
+        //couleurs
+        JPanel colors = new JPanel();
+        JColorChooser chooseColor = new JColorChooser();
+        colors.add(chooseColor);
 
         // Création des bouttons
 //        JPanel buttons = new JPanel(new GridLayout(8, 1, 5, 5));
         BoxLayout buttonsLayout = new BoxLayout(buttons, BoxLayout.Y_AXIS);
         buttons.setLayout(buttonsLayout);
 
-        GridLayout gridcolorButtons = new GridLayout(8, 1, 10, 10);
+        GridLayout gridcolorButtons = new GridLayout(5, 1, 10, 10);
 //        BoxLayout colorButtonsLayout = new BoxLayout(colorButtons, BoxLayout.Y_AXIS);
         colorButtons.setLayout(gridcolorButtons);
 
@@ -86,6 +92,19 @@ public class Dessin extends JPanel {
             }
         });
         colorButtons.add(bleu);
+
+        autre = new JButton("+ de couleurs");
+        autre.setFont(new Font("New Times Roman", Font.BOLD, 16));
+        autre.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Color newColor = JColorChooser.showDialog(dessin, "Choisissez une couleur", couleur);
+                if (newColor != null) {
+                    couleur = newColor;
+                }
+            }
+        });
+        colorButtons.add(autre);
 
         colorButtons.setBorder(BorderFactory.createLineBorder(Color.BLUE, 1));
         colorButtons.setBorder(BorderFactory.createTitledBorder("Couleurs"));
@@ -151,6 +170,7 @@ public class Dessin extends JPanel {
         buttons.add(colorButtons);
         buttons.add(formButtons);
         buttons.add(effaceButtons);
+//        buttons.add(colors);
         //Container pour placer les elements: la feuille de dessin et les boutons de choix de couleur du stylo
         setLabel(x, y);
         this.setLayout(new BorderLayout());

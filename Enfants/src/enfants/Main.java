@@ -1,11 +1,5 @@
 package enfants;
 
-import javax.swing.JFrame;
-import Beans.Question;
-import DAO.DAOQuestion;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author Amine Semmoud
