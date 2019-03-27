@@ -167,13 +167,12 @@ public class Dessin extends JPanel {
                 } while (!(parent instanceof JTabbedPane));
                 JTabbedPane tabbedPane = (JTabbedPane) parent;
                 tabbedPane.setSelectedIndex(0);
+                Onglets onglet = new Onglets();
 //                label.removeAll();
 //                dessin.removeAll();
 //                buttons.removeAll();
 //                parent.getClass();
 //                parent.getLayout();
-
-//                Onglets onglet = new Onglets();
             }
         });
 
