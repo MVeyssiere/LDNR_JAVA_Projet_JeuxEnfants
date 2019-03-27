@@ -9,12 +9,15 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JLabel;
@@ -39,7 +42,13 @@ public class Dessin extends JPanel {
     int shape = 0; // pour choisir la forme du stylo
 
     public Dessin() {
-
+//
+//        dessin = new JPanel() {
+//            Toolkit toolkit = Toolkit.getDefaultToolkit();
+//            Image image = toolkit.getImage("/Ressource/Pencil.png");
+//            Cursor c = toolkit.createCustomCursor(image, new Point(dessin.getX(),dessin.getY()), "");
+//            setCursor(c);
+//        };
         dessin.setSize(1300, 700);
         dessin.setBackground(Color.white);
 
@@ -219,9 +228,13 @@ public class Dessin extends JPanel {
     public void paintComponent(Graphics g) {
         Graphics2D line = (Graphics2D) g;
         line.setColor(couleur);
-        Cursor curseur = new Cursor(Cursor.HAND_CURSOR);
-        this.setCursor(curseur);
-        // test pour mettre une image de stylo à la place du curseur
+//        Cursor curseur = new Cursor(Cursor.HAND_CURSOR);
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        ImageIcon m = new ImageIcon(getClass().getResource("/Ressource/Pencil.png"));
+        Cursor c2 = toolkit.createCustomCursor(m.getImage(), new Point(0, 30), "");
+
+        dessin.setCursor(c2);
+        // test pour mettre une image de stylo à la pl ace du curseur
 //        Toolkit toolkit = getToolkit();
 //        Image cursorImage = new ImageIcon("ressources/Pencil.png").getImage();
 //        Point cursorHotSpot = new Point(dessin.getX(), dessin.getY());

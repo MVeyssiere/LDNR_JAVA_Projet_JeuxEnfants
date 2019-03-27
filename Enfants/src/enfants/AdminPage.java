@@ -4,10 +4,6 @@ import Beans.Question;
 import DAO.DAOQuestion;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,7 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 /**
- * @author Marine V
+ * @author Marine Veyssiere
  */
 public class AdminPage extends JFrame {
 
