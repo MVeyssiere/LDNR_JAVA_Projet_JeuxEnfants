@@ -23,7 +23,11 @@ public class AdminPage extends JFrame {
         JPanel panel = new JPanel();
 
         JTable table = new JTable();
-        DefaultTableModel model = new DefaultTableModel(new String[]{"Id", "Question", "Réponse", "Niveau"}, 0);
+//        JScrollPane scrollpane = new JScrollPane(table);
+//        table.setPreferredScrollableViewportSize(table.getPreferredSize());
+//        table.setFillsViewportHeight(true);
+
+        DefaultTableModel model = new DefaultTableModel(new String[]{"Id", "Question", "Réponse", "Niveau", "", ""}, 0);
 
         DAOQuestion quest = new DAOQuestion();
         for (Question q : quest.findAll()) {
@@ -32,20 +36,44 @@ public class AdminPage extends JFrame {
             String e = q.getQuestion();
             String f = q.getReponse();
             String g = q.getNiveau().toString();
-            model.addRow(new Object[]{d, e, f, g});
+            String update = "Modifier";
+            String supprimer = "Supprimer";
+            model.addRow(new Object[]{d, e, f, g, update, supprimer});
         }
 //        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         table.setModel(model);
-        table.getColumnModel().getColumn(0).setPreferredWidth(50);
-        table.getColumnModel().getColumn(1).setPreferredWidth(500);
-        table.getColumnModel().getColumn(2).setPreferredWidth(200);
-        table.getColumnModel().getColumn(3).setPreferredWidth(50);
+        table.getColumnModel().getColumn(0).setPreferredWidth(75);
+        table.getColumnModel().getColumn(1).setPreferredWidth(800);
+        table.getColumnModel().getColumn(2).setPreferredWidth(300);
+        table.getColumnModel().getColumn(3).setPreferredWidth(150);
+        table.getColumnModel().getColumn(4).setPreferredWidth(200);
+        table.getColumnModel().getColumn(5).setPreferredWidth(200);
 
         JTableHeader header = table.getTableHeader();
         header.setBackground(Color.yellow);
 
         JScrollPane pane = new JScrollPane(table);
         panel.add(pane);
+
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int row = table.rowAtPoint(evt.getPoint());
+                int col = table.columnAtPoint(evt.getPoint());
+                if (row >= 0 && col == 4) {
+                    System.out.println(table.getValueAt(row, 1));
+//                    Question modifierQuestion = new Question(col, question, reponse, NORMAL);
+//                    modifierQuestion.add(table.getValueAt(row, 0));
+//                    update(g);
+//                    //update
+
+                }
+                if (row >= 0 && col == 5) {
+                    //delete
+                }
+            }
+        });
+
 //
 ////        //scrollbar
 ////        JScrollPane scroll = new JScrollPane(frame);
@@ -73,11 +101,10 @@ public class AdminPage extends JFrame {
 //        }
 //        panel.add(entrees, BorderLayout.CENTER);
 //        frame.add(panel);
-
 //        JScrollPane scrollpane = new JScrollPane(table);
 //        scrollpane.setPreferredSize(new Dimension(800, 400));
         frame.setTitle("Administration");
-        frame.setSize(800, 400);
+        frame.setSize(1500, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setContentPane(panel);

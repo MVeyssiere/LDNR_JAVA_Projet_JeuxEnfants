@@ -83,7 +83,7 @@ public class DAOQuestion implements DAO<Question> {
     @Override
     public Question update(Question obj) {
         Question rtObj = null;
-        String sql = "UPDATE " + table + " SET nom=?,"
+        String sql = "UPDATE " + table + " SET "
                 + "question = ?,"
                 + "reponse = ?,"
                 + "niveau = ?,";
@@ -138,7 +138,7 @@ public class DAOQuestion implements DAO<Question> {
     public List<Question> findWithNiveau(Integer niv) {
         ArrayList<Question> retObj = new ArrayList<>();
         // faut faire attention aux espaces qui doivent entouré le nom de la table
-        String sql = "SELECT * FROM " + table + " WHERE niveau =" + niv;
+        String sql = "SELECT * FROM " + table + " WHERE niveau = " + niv;
         try {
             PreparedStatement pstmt = connection.prepareStatement(sql);
             // permet de trouver dans la base de données tous les lignes ayant l'id
