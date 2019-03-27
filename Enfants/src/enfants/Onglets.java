@@ -87,8 +87,8 @@ public class Onglets extends JFrame {
         };
         niveau.setLayout(null);
         niveau.setBackground(Color.YELLOW);
-        JButton niv1 = new JButton("NIVEAU1");
-        JButton niv2 = new JButton("NIVEAU2");
+        JButton niv1 = new JButton("NIVEAU 1");
+        JButton niv2 = new JButton("NIVEAU 2");
         //Ajout des boutons selon le gestionnaire de placement pour les niveaux
         niveau.add(niv1);
         niveau.add(niv2);
