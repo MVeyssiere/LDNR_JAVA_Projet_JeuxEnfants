@@ -11,6 +11,7 @@ package Beans;
  * @author Julien Modena
  */
 public class Question {
+    
 private Integer id;
 private String question;
 private String reponse;
@@ -21,7 +22,9 @@ private Integer niveau;
         this.question = question;
         this.reponse = reponse;
         this.niveau = niveau;
+    
     }
+    
 
     public Integer getId() {
         return id;
