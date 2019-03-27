@@ -16,6 +16,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import sun.java2d.Disposer;
 
 /**
  * @author Marine Veyssiere
@@ -29,7 +30,7 @@ public class Dessin extends JPanel {
     JPanel buttons = new JPanel();
     JPanel colorButtons = new JPanel();
     JPanel formButtons = new JPanel();
-    JButton rouge, vert, bleu, carre, cercle, effacer;
+    JButton rouge, vert, bleu, carre, cercle, effacer, quitter;
 
     Color couleur = Color.BLACK; //initialisation de la couleur du stylo en noir.
     int shape = 0; // pour choisir la forme du stylo
@@ -90,7 +91,7 @@ public class Dessin extends JPanel {
         colorButtons.setBorder(BorderFactory.createTitledBorder("Couleurs"));
 
 //        BoxLayout formButtonsLayout = new BoxLayout(formButtons, BoxLayout.Y_AXIS);
-        GridLayout gridformButtons = new GridLayout(8, 1, 10, 10);
+        GridLayout gridformButtons = new GridLayout(3, 1, 4, 4);
         formButtons.setLayout(gridformButtons);
 
         carre = new JButton("Carré");
@@ -118,7 +119,7 @@ public class Dessin extends JPanel {
         formButtons.setBorder(BorderFactory.createLineBorder(Color.BLUE, 1));
         formButtons.setBorder(BorderFactory.createTitledBorder("Formes"));
 
-        JPanel effaceButtons = new JPanel(new GridLayout(8, 1, 10, 10));
+        JPanel effaceButtons = new JPanel(new GridLayout(2, 1, 4, 4));
 
         effacer = new JButton("Effacer");
         effacer.setBackground(Color.lightGray);
@@ -133,6 +134,18 @@ public class Dessin extends JPanel {
         });
 
         effaceButtons.add(effacer);
+
+        quitter = new JButton("Quitter");
+        quitter.setBackground(Color.lightGray);
+        quitter.setFont(new Font("New Times Roman", Font.BOLD, 16));
+        quitter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                Onglets onglet = new Onglets();
+            }
+        });
+
+        effaceButtons.add(quitter);
 
         // integration des trois panels de boutons au panel boutons général
         buttons.add(colorButtons);

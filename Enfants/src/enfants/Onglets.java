@@ -19,6 +19,7 @@ import javax.imageio.ImageIO;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -58,20 +59,28 @@ public class Onglets extends JFrame {
                 super.paintComponent(g);
                 ImageIcon m = new ImageIcon(getClass().getResource("/Ressource/fond_accueil.jpg"));
                 Image monImage = m.getImage();
-//                Image img = Toolkit.getDefaultToolkit().getImage("/Ressource/fond_accueil.jpg");
                 g.drawImage(monImage, 0, 0, null);
             }
         };
-        activite.setBackground(Color.PINK); // lui donner une couleur
 
+        activite.setLayout(null);
         // creation de trois boutons pour les activités
         JButton jb1 = new JButton("DESSIN");
         JButton jb2 = new JButton("CALCUL");
-        JButton jb3 = new JButton("QUESTION");
+        JButton jb3 = new JButton("QUESTIONS");
         //placement des boutons dans le JPanel
-        jb1.setBounds(170, 100, 150, 40);
-        jb2.setBounds(10, 200, 150, 40);
-        jb3.setBounds(330, 200, 150, 40);
+        jb1.setBounds(570, 200, 200, 60);
+        jb2.setBounds(410, 350, 200, 60);
+        jb3.setBounds(730, 350, 200, 60);
+        jb1.setBackground(Color.magenta);
+        jb1.setFont(new Font("New Times Roman", Font.BOLD, 18));
+        jb1.setForeground(Color.WHITE);
+        jb2.setBackground(Color.magenta);
+        jb2.setForeground(Color.WHITE);
+        jb2.setFont(new Font("New Times Roman", Font.BOLD, 18));
+        jb3.setBackground(Color.magenta);
+        jb3.setForeground(Color.WHITE);
+        jb3.setFont(new Font("New Times Roman", Font.BOLD, 18));
 
         // Ajout des boutons selon le gestionnaire de placement
         activite.add(jb1);
@@ -81,6 +90,7 @@ public class Onglets extends JFrame {
         ///////////////////////////////////////////////////////
         //Niveaux
         niveau = new JPanel();
+        niveau.setLayout(null);
         niveau.setBackground(Color.YELLOW);
         JButton niv1 = new JButton("NIVEAU1");
         JButton niv2 = new JButton("NIVEAU2");
@@ -92,6 +102,7 @@ public class Onglets extends JFrame {
         niv2.setBounds(330, 200, 150, 40);
 
         admin = new JPanel();
+        admin.setLayout(null);
         admin.setBackground(Color.yellow);
         admin.setLayout(new FlowLayout());
 
@@ -119,6 +130,9 @@ public class Onglets extends JFrame {
         jb1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                activite.remove(jb1);
+                activite.remove(jb2);
+                activite.remove(jb3);
                 activite.setVisible(false);
                 Dessin monDessin = new Dessin();
                 BorderLayout layoutActivite = new BorderLayout();
