@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
@@ -112,15 +113,26 @@ public class Onglets extends JFrame {
             }
         };
         admin.setBackground(Color.lightGray);
+
         admin.setLayout(new FlowLayout());
 
         JLabel label = new JLabel("mot de passe");
-        label.setPreferredSize(new Dimension(80, 80));
+        label.setPreferredSize(new Dimension(150, 50));
         admin.add(label);
-        JTextField textField = new JTextField();
 
+        JPasswordField textField = new JPasswordField(10);
+
+//        JTextField textField = new JTextField();
+        textField.setPreferredSize(new Dimension(300, 30));
         admin.add(textField);
-        textField.setColumns(10); //On lui donne un nombre de colonnes à afficher
+//        textField.setColumns(10); //On lui donne un nombre de colonnes à afficher
+
+        JButton boutonAdmin = new JButton("Entrer");
+        boutonAdmin.setPreferredSize(new Dimension(100, 50));
+        boutonAdmin.setFont(new Font("New Times Roman", Font.BOLD, 18));
+        boutonAdmin.setBackground(Color.MAGENTA);
+        boutonAdmin.setForeground(Color.WHITE);
+        admin.add(boutonAdmin);
 
         tp.setBounds(0, 0, jf.getWidth(), jf.getHeight());
 
@@ -148,6 +160,17 @@ public class Onglets extends JFrame {
                 BorderLayout layoutActivite = new BorderLayout();
                 activite.setLayout(layoutActivite);
                 activite.add(monDessin);
+            }
+        });
+
+        boutonAdmin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                admin.setVisible(false);
+                AdminPage adminPage = new AdminPage();
+//                BorderLayout layoutActivite = new BorderLayout();
+//                admin.setLayout(layoutActivite);
+                admin.add(adminPage);
             }
         });
 
