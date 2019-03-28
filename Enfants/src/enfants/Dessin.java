@@ -9,6 +9,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -231,7 +232,9 @@ public class Dessin extends JPanel {
 //        Cursor curseur = new Cursor(Cursor.HAND_CURSOR);
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         ImageIcon m = new ImageIcon(getClass().getResource("/Ressource/Pencil.png"));
-        Cursor c2 = toolkit.createCustomCursor(m.getImage(), new Point(0, 30), "");
+        Image image = m.getImage();
+        Image scaledImage = image.getScaledInstance(35, 35, Image.SCALE_DEFAULT);
+        Cursor c2 = toolkit.createCustomCursor(scaledImage, new Point(0, 30), "");
 
         dessin.setCursor(c2);
         // test pour mettre une image de stylo à la pl ace du curseur
