@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -160,6 +161,21 @@ public class Onglets extends JFrame {
                 BorderLayout layoutActivite = new BorderLayout();
                 activite.setLayout(layoutActivite);
                 activite.add(monDessin);
+            }
+        });
+
+        // action sur le bouton calcul
+        jb2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                activite.remove(jb1);
+                activite.remove(jb2);
+                activite.remove(jb3);
+                activite.setVisible(false);
+                Calcul monCalcul = new Calcul();
+                BorderLayout layoutCalcul = new BorderLayout();
+                activite.setLayout(layoutCalcul);
+                activite.add(monCalcul);
             }
         });
 
