@@ -18,6 +18,7 @@ private Integer id;
 private String question;
 private String reponse;
 private Integer niveau;
+JeuQuestion test = new JeuQuestion();
 
     public Question(Integer id, String question, String reponse, Integer niveau) {
         this.id = id;
@@ -29,8 +30,8 @@ private Integer niveau;
 
     public Question() {
         Question f;
-        JeuQuestion test = new JeuQuestion();
-        f = test.poserquestion(1);
+        
+        f = test.poserInter(1);
         this.id = f.getId();
         this.question = f.getQuestion();
         this.reponse = f.getReponse();
