@@ -127,15 +127,14 @@ public class DAOQuestion implements DAO<Question> {
     }
 
     /**
-     * tri dans des listes des questions par rapport au niveau de la questions
+     * tri dans des listes des questions par rapport au niveau 1 de la questions
      *
-     * @param niv
      * @return
      */
-    public List<Question> findWithNiveau(Integer niv) {
+    public List<Question> findNiveau1() {
         ArrayList<Question> retObj = new ArrayList<>();
         // faut faire attention aux espaces qui doivent entouré le nom de la table
-        String sql = "SELECT * FROM " + table + " WHERE niveau = " + niv;
+        String sql = "SELECT * FROM " + table + " WHERE niveau <= 1";
         try {
             PreparedStatement pstmt = connection.prepareStatement(sql);
             // permet de trouver dans la base de données tous les lignes ayant l'id
@@ -153,6 +152,7 @@ public class DAOQuestion implements DAO<Question> {
         } catch (SQLException ex) {
             Logger.getLogger(DAOQuestion.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return retObj;
     }
 }

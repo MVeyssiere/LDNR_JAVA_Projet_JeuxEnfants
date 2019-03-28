@@ -13,25 +13,25 @@ public class JeuQuestion {
     final static int MIN = 1;
     final static int MAX = 10;
 
-    public Question poserquestion(int niv) {
-
-        Question ques = null;
-        DAOQuestion daniv = new DAOQuestion();
-        int compteur = 0;
-        int aleat = verifierdoublon();
-
-        for (Question q : daniv.findWithNiveau(niv)) {
-            if (aleat == compteur) {
-                ques = q;
-
-                break;
-            }
-            compteur = compteur + 1;
-
-        }
-        return ques;
-
-    }
+//    public Question poserquestion(int niv) {
+//
+//        Question ques = null;
+//        DAOQuestion daniv = new DAOQuestion();
+//        int compteur = 0;
+//        int aleat = verifierdoublon();
+//
+//        for (Question q : daniv.findWithNiveau(niv)) {
+//            if (aleat == compteur) {
+//                ques = q;
+//
+//                break;
+//            }
+//            compteur = compteur + 1;
+//
+//        }
+//        return ques;
+//
+//    }
 
     public int verifierdoublon() {
 

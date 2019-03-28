@@ -26,14 +26,17 @@ public class Calcul extends JPanel {
 
     private static final int MAX_NUM = 10;
     private int num1, num2, resultat;
-    private final String[] op = {"+", "-", "x"};
+    private final String[] op = {"+", "-"};
+    private final String[] op2 = {"+", "-", "x"};
     private String signe;
     private int nombreQuestion = 0;
     JLabel operation;
     JPanel panel;
     JPanel allPanel;
+    Random rm = new Random();
 
     public Calcul() {
+
         allPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -53,7 +56,6 @@ public class Calcul extends JPanel {
 //        panel.setBackground(Color.green);
         panel.setPreferredSize(new Dimension(500, 600));
 
-        Random rm = new Random();
         //Déclaration des variables
         num1 = rm.nextInt(MAX_NUM);
         num2 = rm.nextInt(MAX_NUM);
@@ -129,26 +131,42 @@ public class Calcul extends JPanel {
 //***********************************************************************************************************
 //***********************************************************************************************************
 //bouton autre calcul
-        JButton autre = new JButton("Autre Calcul");
+        JButton niveau1 = new JButton("Autre Calcul Niveau 1");
         tailleCase.fill = GridBagConstraints.BOTH;
         tailleCase.gridwidth = 1;
         tailleCase.gridheight = 1;
         tailleCase.gridx = 1;
         tailleCase.gridy = 7;
-        panel.add(autre, tailleCase);
-        autre.addActionListener(new ActionListener() {
+        panel.add(niveau1, tailleCase);
+        niveau1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-
                 num1 = rm.nextInt(MAX_NUM);
                 num2 = rm.nextInt(MAX_NUM);
                 signe = op[rm.nextInt(op.length)];
-//                String.valueOf(num1);
-//                String.valueOf(num2);
                 Result();
                 operation.setText(num1 + signe + num2);
                 correction.setText(null);
-                rep.setText(null); //pour vider le textfield de la réponse
+                rep.setText(null);
+            }
+        });
+        JButton niveau2 = new JButton("Autre Calcul Niveau 2");
+        tailleCase.fill = GridBagConstraints.BOTH;
+        tailleCase.gridwidth = 1;
+        tailleCase.gridheight = 1;
+        tailleCase.gridx = 1;
+        tailleCase.gridy = 8;
+        panel.add(niveau2, tailleCase);
+        niveau2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                num1 = rm.nextInt(999);
+                num2 = rm.nextInt(999);
+                signe = op2[rm.nextInt(op2.length)];
+                Result2();
+                operation.setText(num1 + signe + num2);
+                correction.setText(null);
+                rep.setText(null);
             }
         });
 
@@ -156,7 +174,6 @@ public class Calcul extends JPanel {
 //***********************************************************************************************************
 //boutton vérifier
         JButton verif = new JButton("Vérifier");
-        verif.setPreferredSize(new Dimension(100, 80));
         tailleCase.fill = GridBagConstraints.BOTH;
         tailleCase.gridwidth = 1;
         tailleCase.gridheight = 1;
@@ -166,17 +183,8 @@ public class Calcul extends JPanel {
         verif.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                switch (signe) {
-                    case "+":
-                        resultat = num1 + num2;
-                        break;
-                    case "-":
-                        resultat = num1 - num2;
-                        break;
-                    case "x":
-                        resultat = num1 * num2;
-                        break;
-                }
+                Result();
+                Result2();
 
                 if (rep.getText().equals(String.valueOf(resultat))) {
                     nombreQuestion++;
@@ -210,9 +218,30 @@ public class Calcul extends JPanel {
                 resultat = num1 + num2;
                 break;
             case "-":
+                if (num2 > num1) {
+                    int tampon = num1;
+                    num1 = num2;
+                    num2 = tampon;
+                } else {
+                    resultat = num1 - num2;
+                }
+                break;
+        }
+    }
+
+    private void Result2() {
+        operation.setText(num1 + signe + num2);
+
+        switch (signe) {
+            case "+":
+                resultat = num1 + num2;
+                break;
+            case "-":
                 resultat = num1 - num2;
                 break;
             case "x":
+                num1 = rm.nextInt(MAX_NUM);
+                num2 = rm.nextInt(MAX_NUM);
                 resultat = num1 * num2;
                 break;
         }
