@@ -57,35 +57,18 @@ public class App {
      */
     private void initialize() {
         //Déclaration des variables
-        
+
         num1 = rm.nextInt(MAX_NUM);
         num2 = rm.nextInt(MAX_NUM);
         signe = op[rm.nextInt(op.length)];
 
-        //Initialisation des opérations
-        
-        operation.setText(num1 + signe + num2);
-
-        switch (signe) {
-            case "+":
-                resultat = num1 + num2;
-                break;
-            case "-":
-                resultat = num1 - num2;
-                break;
-            case "x":
-                resultat = num1 * num2;
-                break;
-        }
-    
         //Création de la fenêtre principale
-        
         frame = new JFrame();
         frame.setBounds(100, 100, 450, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// Fermeture du programme à la fermeture de la fenetre
         GridBagLayout gridBagLayout = new GridBagLayout();//Création d'une grille
         frame.getContentPane().setLayout(gridBagLayout);
-        
+        Result();
 //***********************************************************************************************************
 //***********************************************************************************************************
         JLabel reponse = new JLabel("CALCUL MENTAL", SwingConstants.CENTER);
@@ -99,10 +82,9 @@ public class App {
         tailleCase.gridx = 1;
         tailleCase.gridy = 1;
         frame.getContentPane().add(reponse, tailleCase);
-        
-//***********************************************************************************************************
-//***********************************************************************************************************
 
+//***********************************************************************************************************
+//***********************************************************************************************************
         operation.setFont(new Font("Serif", Font.PLAIN, 20));
         tailleCase.fill = GridBagConstraints.BOTH;
         tailleCase.gridwidth = 3;
@@ -110,10 +92,9 @@ public class App {
         tailleCase.gridx = 1;
         tailleCase.gridy = 2;
         frame.getContentPane().add(operation, tailleCase);
-        
+
 //***********************************************************************************************************
 //***********************************************************************************************************        
-
         correction.setFont(new Font("Serif", Font.PLAIN, 20));
         tailleCase.fill = GridBagConstraints.BOTH;
         tailleCase.gridwidth = 3;
@@ -121,10 +102,9 @@ public class App {
         tailleCase.gridx = 1;
         tailleCase.gridy = 3;
         frame.getContentPane().add(correction, tailleCase);
-        
-//***********************************************************************************************************
-//***********************************************************************************************************
 
+//***********************************************************************************************************
+//***********************************************************************************************************
         JTextField rep = new JTextField();
         rep.setHorizontalAlignment(JTextField.CENTER);
         rep.requestFocus();
@@ -134,11 +114,9 @@ public class App {
         tailleCase.gridx = 1;
         tailleCase.gridy = 4;
         frame.getContentPane().add(rep, tailleCase);
-        
-        
-//***********************************************************************************************************
-//***********************************************************************************************************
 
+//***********************************************************************************************************
+//***********************************************************************************************************
         JButton solu = new JButton("Solution");
         tailleCase.fill = GridBagConstraints.BOTH;
         tailleCase.gridwidth = 1;
@@ -150,14 +128,12 @@ public class App {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 rep.setText(Integer.toString(resultat));
-               
 
             }
         });
-        
-//***********************************************************************************************************
-//***********************************************************************************************************
 
+//***********************************************************************************************************
+//***********************************************************************************************************
         JButton autre = new JButton("Autre Calcul");
         tailleCase.fill = GridBagConstraints.BOTH;
         tailleCase.gridwidth = 1;
@@ -174,17 +150,16 @@ public class App {
                 signe = op[rm.nextInt(op.length)];
                 String.valueOf(num1);
                 String.valueOf(num2);
+                Result();
                 operation.setText(num1 + signe + num2);
                 correction.setText(null);
                 rep.setText(null);
-               
-               
+
             }
         });
-        
-//***********************************************************************************************************
-//***********************************************************************************************************
 
+//***********************************************************************************************************
+//***********************************************************************************************************
         JButton verif = new JButton("Vérifier");
         tailleCase.fill = GridBagConstraints.BOTH;
         tailleCase.gridwidth = 1;
@@ -229,9 +204,24 @@ public class App {
             }
 
         });
-        
 
     }
-    
+    //Initialisation des opérations
 
+    private void Result() {
+        operation.setText(num1 + signe + num2);
+
+        switch (signe) {
+            case "+":
+                resultat = num1 + num2;
+                break;
+            case "-":
+                resultat = num1 - num2;
+                break;
+            case "x":
+                resultat = num1 * num2;
+                break;
+        }
+
+    }
 }
