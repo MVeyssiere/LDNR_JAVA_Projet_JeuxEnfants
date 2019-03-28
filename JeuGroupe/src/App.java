@@ -68,7 +68,7 @@ public class App {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// Fermeture du programme à la fermeture de la fenetre
         GridBagLayout gridBagLayout = new GridBagLayout();//Création d'une grille
         frame.getContentPane().setLayout(gridBagLayout);
-        Result();
+        ResultNiv1();
 //***********************************************************************************************************
 //***********************************************************************************************************
         JLabel reponse = new JLabel("CALCUL MENTAL", SwingConstants.CENTER);
@@ -150,7 +150,7 @@ public class App {
                 signe = op[rm.nextInt(op.length)];
                 String.valueOf(num1);
                 String.valueOf(num2);
-                Result();
+                ResultNiv1();
                 operation.setText(num1 + signe + num2);
                 correction.setText(null);
                 rep.setText(null);
@@ -170,21 +170,10 @@ public class App {
         verif.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                switch (signe) {
-                    case "+":
-                        resultat = num1 + num2;
-                        break;
-                    case "-":
-                        resultat = num1 - num2;
-                        break;
-                    case "x":
-                        resultat = num1 * num2;
-                        break;
-                }
+                ResultNiv1();
 
                 if (rep.getText().equals(String.valueOf(resultat))) {
                     nombreQuestion++;
-
                     correction.setForeground(Color.green);
                     correction.setText("Bonne Réponse!!!");
                     rep.setText("");
@@ -198,7 +187,6 @@ public class App {
                     correction.setForeground(Color.red);
                     correction.setText("Dommage: Mauvaise Réponse!");
                     rep.setText("");
-
                     rep.requestFocus();
                 }
             }
@@ -208,7 +196,7 @@ public class App {
     }
     //Initialisation des opérations
 
-    private void Result() {
+    private void ResultNiv1() {
         operation.setText(num1 + signe + num2);
 
         switch (signe) {
@@ -216,6 +204,11 @@ public class App {
                 resultat = num1 + num2;
                 break;
             case "-":
+                if(num2 > num1){
+                    int tampon = num1;
+                    num1 = num2;
+                    num2 = tampon;
+                }else
                 resultat = num1 - num2;
                 break;
             case "x":
