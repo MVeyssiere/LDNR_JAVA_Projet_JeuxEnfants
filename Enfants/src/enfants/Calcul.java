@@ -69,9 +69,9 @@ public class Calcul extends JPanel {
         reponse.setFont(new Font("Serif", Font.PLAIN, 40));
         GridBagConstraints tailleCase = new GridBagConstraints();
         tailleCase.fill = GridBagConstraints.BOTH;
-        tailleCase.weightx = 1;
-        tailleCase.weighty = 1;
-        tailleCase.gridwidth = 3;
+        tailleCase.weightx = 0.5;
+        tailleCase.weighty = 0.5;
+        tailleCase.gridwidth = 1;
         tailleCase.gridheight = 1;
         tailleCase.gridx = 1;
         tailleCase.gridy = 1;
@@ -79,9 +79,9 @@ public class Calcul extends JPanel {
 //***********************************************************************************************************
 //***********************************************************************************************************
         //calcul
-        operation.setFont(new Font("Serif", Font.PLAIN, 28));
+        operation.setFont(new Font("Serif", Font.PLAIN, 38));
         tailleCase.fill = GridBagConstraints.BOTH;
-        tailleCase.gridwidth = 3;
+        tailleCase.gridwidth = 1;
         tailleCase.gridheight = 1;
         tailleCase.gridx = 1;
         tailleCase.gridy = 2;
@@ -92,10 +92,10 @@ public class Calcul extends JPanel {
 // verification
         correction.setFont(new Font("Serif", Font.PLAIN, 20));
         tailleCase.fill = GridBagConstraints.BOTH;
-        tailleCase.gridwidth = 3;
+        tailleCase.gridwidth = 1;
         tailleCase.gridheight = 1;
         tailleCase.gridx = 1;
-        tailleCase.gridy = 3;
+        tailleCase.gridy = 4;
         panel.add(correction, tailleCase);
 
 //***********************************************************************************************************
@@ -108,18 +108,18 @@ public class Calcul extends JPanel {
         tailleCase.gridwidth = 1;
         tailleCase.gridheight = 1;
         tailleCase.gridx = 1;
-        tailleCase.gridy = 4;
+        tailleCase.gridy = 5;
         panel.add(rep, tailleCase);
 
 //***********************************************************************************************************
 //***********************************************************************************************************
 //solution
         JButton solu = new JButton("Solution");
-        tailleCase.fill = GridBagConstraints.BOTH;
+        tailleCase.fill = GridBagConstraints.RELATIVE;
         tailleCase.gridwidth = 1;
         tailleCase.gridheight = 1;
         tailleCase.gridx = 1;
-        tailleCase.gridy = 6;
+        tailleCase.gridy = 8;
         panel.add(solu, tailleCase);
         solu.addActionListener(new ActionListener() {
             @Override
@@ -132,11 +132,11 @@ public class Calcul extends JPanel {
 //***********************************************************************************************************
 //bouton autre calcul
         JButton niveau1 = new JButton("Autre Calcul Niveau 1");
-        tailleCase.fill = GridBagConstraints.BOTH;
+        tailleCase.fill = GridBagConstraints.REMAINDER;
         tailleCase.gridwidth = 1;
         tailleCase.gridheight = 1;
         tailleCase.gridx = 1;
-        tailleCase.gridy = 7;
+        tailleCase.gridy = 10;
         panel.add(niveau1, tailleCase);
         niveau1.addActionListener(new ActionListener() {
             @Override
@@ -151,11 +151,11 @@ public class Calcul extends JPanel {
             }
         });
         JButton niveau2 = new JButton("Autre Calcul Niveau 2");
-        tailleCase.fill = GridBagConstraints.BOTH;
+        tailleCase.fill = GridBagConstraints.ABOVE_BASELINE;
         tailleCase.gridwidth = 1;
         tailleCase.gridheight = 1;
         tailleCase.gridx = 1;
-        tailleCase.gridy = 8;
+        tailleCase.gridy = 12;
         panel.add(niveau2, tailleCase);
         niveau2.addActionListener(new ActionListener() {
             @Override
@@ -172,13 +172,13 @@ public class Calcul extends JPanel {
 
 //***********************************************************************************************************
 //***********************************************************************************************************
-//boutton vérifier
+//bouton vérifier
         JButton verif = new JButton("Vérifier");
-        tailleCase.fill = GridBagConstraints.BOTH;
+        tailleCase.fill = GridBagConstraints.WEST;
         tailleCase.gridwidth = 1;
         tailleCase.gridheight = 1;
         tailleCase.gridx = 1;
-        tailleCase.gridy = 5;
+        tailleCase.gridy = 6;
         panel.add(verif, tailleCase);
         verif.addActionListener(new ActionListener() {
             @Override
