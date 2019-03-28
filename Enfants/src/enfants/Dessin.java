@@ -169,14 +169,6 @@ public class Dessin extends JPanel {
         quitter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                e.getActionCommand();
-                Component source = (Component) e.getSource();
-                Container parent = source.getParent();// will give the container of the button
-                do {
-                    parent = parent.getParent();
-                } while (!(parent instanceof JTabbedPane));
-                JTabbedPane tabbedPane = (JTabbedPane) parent;
-                tabbedPane.setSelectedIndex(0);
                 Onglets onglet = new Onglets();
             }
         });
