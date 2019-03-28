@@ -18,6 +18,13 @@ public class Question {
         this.niveau = niveau;
     }
 
+    public Question(String question, String reponse, Integer niveau) {
+        this.question = question;
+        this.reponse = reponse;
+        this.niveau = niveau;
+    }
+
+
     public Integer getId() {
         return id;
     }

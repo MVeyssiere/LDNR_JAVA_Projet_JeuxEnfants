@@ -57,7 +57,6 @@ public class DAOQuestion implements DAO<Question> {
             pstmt.executeUpdate();
             ResultSet generatedKeys = pstmt.getGeneratedKeys();
             if (generatedKeys.first()) {
-
                 rtObj = this.find(generatedKeys.getInt(1));
             }
         } catch (SQLException ex) {

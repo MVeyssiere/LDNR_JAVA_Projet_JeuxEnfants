@@ -2,38 +2,33 @@ package enfants;
 
 import Beans.Question;
 import DAO.DAOQuestion;
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 /**
  * @author Marine Veyssiere
  */
-public class AdminPage extends JFrame {
+public class AdminPage extends JPanel {
 
-    JFrame frame = new JFrame();
+    JPanel admin = new JPanel();
 
     public AdminPage() {
 
-        //panel général avec nord/sud/est/ouest
-        JPanel panel = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                ImageIcon m = new ImageIcon(getClass().getResource("/Ressource/fond_admin.jpg"));
-                Image monImage = m.getImage();
-                g.drawImage(monImage, 0, 0, 1290, 700, null);
-            }
-        };
+        admin.setLayout(new GridLayout(2, 1));
 
         JTable table = new JTable();
 //        JScrollPane scrollpane = new JScrollPane(table);
@@ -60,11 +55,12 @@ public class AdminPage extends JFrame {
         table.getColumnModel().getColumn(2).setPreferredWidth(150); // largeur de la colonne réponse
         table.setPreferredScrollableViewportSize(table.getPreferredSize());
         table.setFillsViewportHeight(true); // permettre à la table de prendre la taille de la fenetre
+        table.setBackground(new Color(230, 242, 255));
         JTableHeader header = table.getTableHeader(); // afficher les colonnes headers
         header.setBackground(Color.yellow); // fond jaune pour les headers
-
-        JScrollPane pane = new JScrollPane(table);
-        panel.add(pane);
+//
+//        JScrollPane pane = new JScrollPane(table);
+//        this.add(pane);
 
         table.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
@@ -85,23 +81,65 @@ public class AdminPage extends JFrame {
                 if (row >= 0 && col == 4) {
                     //integrer try catch pour ne pas afficher le message si une erreur s'est produite
                     daoq.update(updatedQuestion);
-                    JOptionPane.showMessageDialog(panel, "La modification a bien été effectuée");
+                    JOptionPane.showMessageDialog(getParent(), "La modification a bien été effectuée");
                 }
                 // supprimer la ligne
                 if (row >= 0 && col == 5) {
                     //integrer try catch pour ne pas afficher le message si une erreur s'est produite
                     daoq.delete(updatedQuestion);
-                    JOptionPane.showMessageDialog(panel, "La suppression a bien été effectuée");
+                    model.removeRow(row);
+                    JOptionPane.showMessageDialog(getParent(), "La suppression a bien été effectuée");
                 }
-
             }
         });
-        frame.setTitle("Administration");
-        frame.setSize(1500, 500);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-        frame.setContentPane(panel);
-//        frame.getContentPane().add(scroll);
-        frame.setVisible(true);
+
+        JTable tableNew = new JTable();
+
+        DefaultTableModel modelNew = new DefaultTableModel(new String[]{"Votre question", "Votre réponse", "Niveau", ""}, 0);
+        modelNew.addRow(new Object[]{"", "", 0, "Ajouter"});
+
+        // taille de la table
+        tableNew.setModel(modelNew);
+        tableNew.setRowHeight(20); //hauteur des cellules de la table
+        tableNew.getColumnModel().getColumn(0).setPreferredWidth(800); // largeur de la colonne questions
+        tableNew.getColumnModel().getColumn(1).setPreferredWidth(300); // largeur de la colonne réponse
+//        tableNew.setPreferredScrollableViewportSize(table.getPreferredSize());
+//        tableNew.setFillsViewportHeight(true); // permettre à la table de prendre la taille de la fenetre
+        JTableHeader headerNew = tableNew.getTableHeader(); // afficher les colonnes headers
+        headerNew.setBackground(Color.GREEN); // fond jaune pour les headers
+
+        tableNew.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int new_niveau;
+                String new_question, new_reponse;
+
+                int row = tableNew.rowAtPoint(evt.getPoint());
+                int col = tableNew.columnAtPoint(evt.getPoint());
+
+                //recuperer les valeurs de la ligne
+                new_question = tableNew.getValueAt(tableNew.getSelectedRow(), 0).toString();
+                new_reponse = tableNew.getValueAt(tableNew.getSelectedRow(), 1).toString();
+                new_niveau = Integer.parseInt(tableNew.getValueAt(tableNew.getSelectedRow(), 2).toString());
+
+                DAOQuestion daoadd = new DAOQuestion();
+                Question addQuestion = new Question(0, new_question, new_reponse, new_niveau);
+                // ajouter la ligne
+                if (row >= 0 && col == 3) {
+                    //integrer try catch pour ne pas afficher le message si une erreur s'est produite
+                    daoadd.create(addQuestion);
+                    JOptionPane.showMessageDialog(getParent(), "Une nouvelle question et sa réponse ont été ajoutés.");
+                }
+            }
+        });
+
+        JScrollPane sp = new JScrollPane(table);
+        JScrollPane sp2 = new JScrollPane(tableNew);
+        admin.add(sp);
+        admin.add(sp2);
+
+        admin.validate();
+        this.add(admin);
     }
+
 }

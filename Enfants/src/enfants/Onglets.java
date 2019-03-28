@@ -13,10 +13,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
 
 /**
  * @author Amine Semmoud
@@ -166,11 +166,20 @@ public class Onglets extends JFrame {
         boutonAdmin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                admin.setVisible(false);
-                AdminPage adminPage = new AdminPage();
-//                BorderLayout layoutActivite = new BorderLayout();
-//                admin.setLayout(layoutActivite);
-                admin.add(adminPage);
+                String pwd = "coucou";
+                String mypwd = String.valueOf(textField.getPassword());
+                if (mypwd.equals(pwd)) {
+                    admin.remove(boutonAdmin);
+                    admin.remove(textField);
+                    admin.remove(label);
+                    admin.setVisible(false);
+                    AdminPage adminPage = new AdminPage();
+                    //                BoxLayout layoutAdmin = new BoxLayout(admin, BoxLayout.Y_AXIS);
+                    //                admin.setLayout(layoutAdmin);
+                    admin.add(adminPage);
+                } else {
+                    JOptionPane.showMessageDialog(admin, "Le mot de passe est erroné", "ERREUR", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
@@ -179,4 +188,5 @@ public class Onglets extends JFrame {
         jf.setBackground(Color.WHITE);
         jf.setVisible(true);
     }
+    
 }
