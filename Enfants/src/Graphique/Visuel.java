@@ -42,7 +42,7 @@ public class Visuel extends JPanel{
         JButton verifier = new JButton("Verifier");
         JButton solution = new JButton("Solution");
         JButton autre = new JButton("Autre Question");
-////        JeuQuestion test = new JeuQuestion();
+////      
         JTextField rep = new JTextField(30);
         JLabel ti = new JLabel("Réponse : ");
         
@@ -84,7 +84,7 @@ public class Visuel extends JPanel{
         
        
         Question f = new Question();
-//        f = test.poserquestion(1);
+
         System.out.println("f = " + f.toString());
         
        
@@ -101,51 +101,52 @@ public class Visuel extends JPanel{
         verifier.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String verif = rep.getText();
-                verif  = verif.toLowerCase();
+                String verif= rep.getText();
+                
                 String reponsedb = f.getReponse();
                 String repo ;
                 
-                if(isANumber(reponsedb)==true)
-                {
+                if(isANumber(reponsedb)==true && isANumber(verif)==true)
+                {   verif = verif;
                     repo = reponsedb;
                 }
                 else{
                     repo = reponsedb.toLowerCase();
+                    verif  = verif.toLowerCase();
                 }
                 System.out.println("repo = " + repo);
                 System.out.println("f.getReponse() = " + f.getReponse());
                 
                 if(verif.equals(repo))
                 {
-                    soluce.setText("Bien Joué l'ami"+ f.getReponse());
+                    soluce.setText("Bien Joué !!!! "+ f.getReponse());
                     rep.setText(null);
                 }
                 else{
-                    soluce.setText("c'est dommagel'ami la solution était " + f.getReponse());
-                    f.setReponse(null);
+                    soluce.setText("Quel dommage !!!!  la solution était " + f.getReponse());
+                   // f.setReponse(null);
                     rep.setText(null);
                 }
             }
         });
         
         solution.addActionListener((ActionEvent e) -> {
-            soluce.setText("T'aurais pu repondre la reponse etait "+ f.getReponse());
-            f.setReponse(null);
+            String reponsedb = f.getReponse();
+            soluce.setText("T'aurais pu repondre la reponse etait "+ reponsedb);
+           // f.setReponse(null);
             rep.setText(null);
             
         });
         
         
-        autre.addActionListener((ActionEvent e) -> {
-            rep.setText(null);
-            f.setReponse(null);
-            soluce.setText(null);
-            String reponsedb = null;
-            
-            reponsedb = f.getReponse();
-            System.out.println("reponsedb dans le autre = " + reponsedb);
-            initGUI();
+        autre.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                rep.setText(null);
+//                f.setReponse(null);
+                soluce.setText(null);
+                initGUI();
+            }
         });
         
    
