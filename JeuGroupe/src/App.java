@@ -158,7 +158,7 @@ public class App {
 
             }
         });
-        
+
         JButton niveau2 = new JButton("Autre Calcul Niveau 2");
         tailleCase.fill = GridBagConstraints.BOTH;
         tailleCase.gridwidth = 1;
@@ -170,12 +170,12 @@ public class App {
             @Override
             public void actionPerformed(ActionEvent ae) {
 
-                num1 = rm.nextInt(MAX_NUM);
-                num2 = rm.nextInt(MAX_NUM);
+                num1 = rm.nextInt(999);
+                num2 = rm.nextInt(999);
                 signe = op2[rm.nextInt(op2.length)];
                 String.valueOf(num1);
                 String.valueOf(num2);
-                Result();
+                Result2();
                 operation.setText(num1 + signe + num2);
                 correction.setText(null);
                 rep.setText(null);
@@ -196,6 +196,7 @@ public class App {
             public void actionPerformed(ActionEvent e) {
 
                 Result();
+                Result2();
 
                 if (rep.getText().equals(String.valueOf(resultat))) {
                     nombreQuestion++;
@@ -229,17 +230,35 @@ public class App {
                 resultat = num1 + num2;
                 break;
             case "-":
-                if(num2 > num1){
+                if (num2 > num1) {
                     int tampon = num1;
                     num1 = num2;
                     num2 = tampon;
-                }else
-                resultat = num1 - num2;
+                } else {
+                    resultat = num1 - num2;
+                }
                 break;
-            case "x":
+            
+        }
+    }
+
+    private void Result2() {
+        operation.setText(num1 + signe + num2);
+
+        switch (signe) {
+            case "+":
+                resultat = num1 + num2;
+                break;
+            case "-":
+                resultat = num1 - num2;
+                
+                break;
+                case "x":
+                num1 = rm.nextInt(MAX_NUM);
+                num2 = rm.nextInt(MAX_NUM);
                 resultat = num1 * num2;
                 break;
+            
         }
-
     }
 }
