@@ -72,12 +72,10 @@ public class DAOQuestion implements DAO<Question> {
         try {
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setInt(1, obj.getId());
-            int nbligneimpacter = pstmt.executeUpdate();
-
+            pstmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DAOQuestion.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     @Override
@@ -86,7 +84,8 @@ public class DAOQuestion implements DAO<Question> {
         String sql = "UPDATE " + table + " SET "
                 + "question = ?,"
                 + "reponse = ?,"
-                + "niveau = ?,";
+                + "niveau = ?"
+                + " WHERE id_question = ?";
         try {
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, obj.getQuestion());
@@ -101,7 +100,6 @@ public class DAOQuestion implements DAO<Question> {
             Logger.getLogger(DAOQuestion.class.getName()).log(Level.SEVERE, null, ex);
         }
         return rtObj;
-
     }
 
     @Override

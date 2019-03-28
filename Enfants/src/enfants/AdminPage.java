@@ -4,6 +4,7 @@ import Beans.Question;
 import DAO.DAOQuestion;
 import java.awt.Color;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -58,19 +59,31 @@ public class AdminPage extends JFrame {
         table.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int id_table, niveau_table;
+                String question_table, reponse_table;
                 int row = table.rowAtPoint(evt.getPoint());
                 int col = table.columnAtPoint(evt.getPoint());
-                if (row >= 0 && col == 4) {
-                    System.out.println(table.getValueAt(row, 1));
-//                    Question modifierQuestion = new Question(col, question, reponse, NORMAL);
-//                    modifierQuestion.add(table.getValueAt(row, 0));
-//                    update(g);
-//                    //update
 
+                //recuperer les valeurs de la ligne
+                id_table = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
+                question_table = table.getValueAt(table.getSelectedRow(), 1).toString();
+                reponse_table = table.getValueAt(table.getSelectedRow(), 2).toString();
+                niveau_table = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 3).toString());
+                DAOQuestion daoq = new DAOQuestion();
+                Question updatedQuestion = new Question(id_table, question_table, reponse_table, niveau_table);
+                // modifier la ligne
+                if (row >= 0 && col == 4) {
+                    //integrer try catch pour ne pas afficher le message si une erreur s'est produite
+                    daoq.update(updatedQuestion);
+                    JOptionPane.showMessageDialog(panel, "La modification a bien été effectuée");
                 }
+                // supprimer la ligne
                 if (row >= 0 && col == 5) {
-                    //delete
+                    //integrer try catch pour ne pas afficher le message si une erreur s'est produite
+                    daoq.delete(updatedQuestion);
+                    JOptionPane.showMessageDialog(panel, "La suppression a bien été effectuée");
                 }
+
             }
         });
 
