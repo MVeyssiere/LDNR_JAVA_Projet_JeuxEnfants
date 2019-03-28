@@ -20,7 +20,8 @@ public class App {
 
     private static final int MAX_NUM = 10;
     private int num1, num2, resultat;
-    private final String[] op = {"+", "-", "x"};
+    private final String[] op = {"+", "-"};
+    private final String[] op2 = {"+", "-", "x"};
     private String signe;
     private int nombreQuestion = 0;
 
@@ -68,7 +69,7 @@ public class App {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// Fermeture du programme à la fermeture de la fenetre
         GridBagLayout gridBagLayout = new GridBagLayout();//Création d'une grille
         frame.getContentPane().setLayout(gridBagLayout);
-        ResultNiv1();
+        Result();
 //***********************************************************************************************************
 //***********************************************************************************************************
         JLabel reponse = new JLabel("CALCUL MENTAL", SwingConstants.CENTER);
@@ -134,14 +135,14 @@ public class App {
 
 //***********************************************************************************************************
 //***********************************************************************************************************
-        JButton autre = new JButton("Autre Calcul");
+        JButton niveau1 = new JButton("Autre Calcul Niveau 1");
         tailleCase.fill = GridBagConstraints.BOTH;
         tailleCase.gridwidth = 1;
         tailleCase.gridheight = 1;
         tailleCase.gridx = 1;
         tailleCase.gridy = 7;
-        frame.getContentPane().add(autre, tailleCase);
-        autre.addActionListener(new ActionListener() {
+        frame.getContentPane().add(niveau1, tailleCase);
+        niveau1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
 
@@ -150,7 +151,31 @@ public class App {
                 signe = op[rm.nextInt(op.length)];
                 String.valueOf(num1);
                 String.valueOf(num2);
-                ResultNiv1();
+                Result();
+                operation.setText(num1 + signe + num2);
+                correction.setText(null);
+                rep.setText(null);
+
+            }
+        });
+        
+        JButton niveau2 = new JButton("Autre Calcul Niveau 2");
+        tailleCase.fill = GridBagConstraints.BOTH;
+        tailleCase.gridwidth = 1;
+        tailleCase.gridheight = 1;
+        tailleCase.gridx = 1;
+        tailleCase.gridy = 8;
+        frame.getContentPane().add(niveau2, tailleCase);
+        niveau2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+                num1 = rm.nextInt(MAX_NUM);
+                num2 = rm.nextInt(MAX_NUM);
+                signe = op2[rm.nextInt(op2.length)];
+                String.valueOf(num1);
+                String.valueOf(num2);
+                Result();
                 operation.setText(num1 + signe + num2);
                 correction.setText(null);
                 rep.setText(null);
@@ -170,7 +195,7 @@ public class App {
         verif.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                ResultNiv1();
+                Result();
 
                 if (rep.getText().equals(String.valueOf(resultat))) {
                     nombreQuestion++;
@@ -196,7 +221,7 @@ public class App {
     }
     //Initialisation des opérations
 
-    private void ResultNiv1() {
+    private void Result() {
         operation.setText(num1 + signe + num2);
 
         switch (signe) {
