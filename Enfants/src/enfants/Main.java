@@ -6,6 +6,8 @@
 package enfants;
 
 import Graphique.Visuel;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -20,26 +22,9 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-//        JeuQuestion test = new JeuQuestion();
-//        Question f = test.poserquestion(1);
-//        java.util.Scanner sc = new java.util.Scanner(System.in);
-////        System.out.println("saisir le niveau que vous souhaitez");
-////        int niveau = sc.nextInt();
-//        for(int i =0; i<11;i++)
-//        {
-//            
-//        System.out.println("f = " + f);
-//            
-//        }
-//            DAOQuestion daop = new DAOQuestion();
-//                    for(Question p : daop.findAll())
-//        {
-//            System.out.println("p = " + p);
-//        }
-        
-        
-        new Visuel();
-
+        Visuel visuel = new Visuel();
+     
+       
         
         
         
