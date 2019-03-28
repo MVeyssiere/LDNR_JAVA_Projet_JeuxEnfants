@@ -179,6 +179,21 @@ public class Onglets extends JFrame {
             }
         });
 
+        // action sur le bouton Questions Reponses
+        jb3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                activite.remove(jb1);
+                activite.remove(jb2);
+                activite.remove(jb3);
+                activite.setVisible(false);
+                Visuel monVisuel = new Visuel();
+                BorderLayout layoutVisuel = new BorderLayout();
+                activite.setLayout(layoutVisuel);
+                activite.add(monVisuel);
+            }
+        });
+
         boutonAdmin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
