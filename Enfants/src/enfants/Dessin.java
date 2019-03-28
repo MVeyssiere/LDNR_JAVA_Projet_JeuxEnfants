@@ -1,5 +1,6 @@
 package enfants;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -11,11 +12,14 @@ import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.Shape;
+import java.awt.Stroke;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Hashtable;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -23,7 +27,10 @@ import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  * @author Marine Veyssiere
@@ -39,6 +46,7 @@ public class Dessin extends JPanel {
     JPanel formButtons = new JPanel();
     JButton rouge, vert, bleu, autre, carre, cercle, effacer, quitter;
 
+    int tailleCurseur = 3;
     Color couleur = Color.BLACK; //initialisation de la couleur du stylo en noir.
     int shape = 0; // pour choisir la forme du stylo
 
@@ -115,6 +123,33 @@ public class Dessin extends JPanel {
         });
         colorButtons.add(autre);
 
+        //slider taille crayon
+        JSlider slider = new JSlider(JSlider.HORIZONTAL, 1, 30, 10); //slide horizontale
+        slider.setMajorTickSpacing(5); // traits d'espacement sur la slide
+        slider.setMinorTickSpacing(1); // petits traits d'espacement sur la slide
+
+        slider.setPaintTicks(true);
+        slider.setPaintLabels(true); //afficher les labels sur la slide
+        //label pour les positions
+        Hashtable position = new Hashtable();
+        position.put(1, new JLabel("0"));
+        position.put(5, new JLabel("5"));
+        position.put(10, new JLabel("10"));
+        position.put(15, new JLabel("15"));
+        position.put(20, new JLabel("20"));
+        position.put(25, new JLabel("25"));
+        position.put(29, new JLabel("30"));
+        slider.setLabelTable(position);  //affichage des labels sur la slide
+        //creation de l'action sur la slide
+        slider.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                tailleCurseur = slider.getValue();
+            }
+        });
+
+        colorButtons.add(slider);
+
+
         // bordure pour distinger les boutons couleurs des boutons formes ...
         colorButtons.setBorder(BorderFactory.createLineBorder(Color.BLUE, 1));
         colorButtons.setBorder(BorderFactory.createTitledBorder("Couleurs"));
@@ -131,6 +166,7 @@ public class Dessin extends JPanel {
                 shape = 1; // mettre la forme du stylo en carré
             }
         });
+
         formButtons.add(carre);
 
         cercle = new JButton("Cercle");
@@ -222,14 +258,9 @@ public class Dessin extends JPanel {
         Image image = m.getImage();
         Image scaledImage = image.getScaledInstance(35, 35, Image.SCALE_DEFAULT);
         Cursor c2 = toolkit.createCustomCursor(scaledImage, new Point(0, 30), "");
+        line.setStroke(new BasicStroke(tailleCurseur)); // appliquer la taille du brush guidé par le slider sur le pinceau
 
         dessin.setCursor(c2);
-        // test pour mettre une image de stylo à la pl ace du curseur
-//        Toolkit toolkit = getToolkit();
-//        Image cursorImage = new ImageIcon("ressources/Pencil.png").getImage();
-//        Point cursorHotSpot = new Point(dessin.getX(), dessin.getY());
-//        Cursor lightPenCursor = toolkit.createCustomCursor(cursorImage, cursorHotSpot, "lightPenCursor");
-//        this.setCursor(lightPenCursor); //Within a JPanel
 
         switch (shape) {
             case 1:
