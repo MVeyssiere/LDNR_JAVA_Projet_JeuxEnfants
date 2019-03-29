@@ -3,8 +3,6 @@ package enfants;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -12,8 +10,6 @@ import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.Shape;
-import java.awt.Stroke;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +24,6 @@ import javax.swing.JColorChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
-import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -51,13 +46,7 @@ public class Dessin extends JPanel {
     int shape = 0; // pour choisir la forme du stylo
 
     public Dessin() {
-//
-//        dessin = new JPanel() {
-//            Toolkit toolkit = Toolkit.getDefaultToolkit();
-//            Image image = toolkit.getImage("/Ressource/Pencil.png");
-//            Cursor c = toolkit.createCustomCursor(image, new Point(dessin.getX(),dessin.getY()), "");
-//            setCursor(c);
-//        };
+
         dessin.setSize(1300, 700);
         dessin.setBackground(Color.white);
 
@@ -69,10 +58,12 @@ public class Dessin extends JPanel {
         JColorChooser chooseColor = new JColorChooser();
         colors.add(chooseColor);
 
-        // Création des bouttons
+        ////////////////////////////////////////////////////////////////
+        // Création des boutons
         BoxLayout buttonsLayout = new BoxLayout(buttons, BoxLayout.Y_AXIS);
         buttons.setLayout(buttonsLayout);
 
+        // layout pour les boutons de couleur
         GridLayout gridcolorButtons = new GridLayout(5, 1, 10, 10);
         colorButtons.setLayout(gridcolorButtons);
 
@@ -127,7 +118,6 @@ public class Dessin extends JPanel {
         JSlider slider = new JSlider(JSlider.HORIZONTAL, 1, 30, 10); //slide horizontale
         slider.setMajorTickSpacing(5); // traits d'espacement sur la slide
         slider.setMinorTickSpacing(1); // petits traits d'espacement sur la slide
-
         slider.setPaintTicks(true);
         slider.setPaintLabels(true); //afficher les labels sur la slide
         //label pour les positions
@@ -149,11 +139,11 @@ public class Dessin extends JPanel {
 
         colorButtons.add(slider);
 
-
         // bordure pour distinger les boutons couleurs des boutons formes ...
         colorButtons.setBorder(BorderFactory.createLineBorder(Color.BLUE, 1));
         colorButtons.setBorder(BorderFactory.createTitledBorder("Couleurs"));
 
+        //boutons pour la forme du pinceau
         GridLayout gridformButtons = new GridLayout(3, 1, 4, 4);
         formButtons.setLayout(gridformButtons);
 
