@@ -24,11 +24,12 @@ import javax.swing.SwingConstants;
 public class Calcul extends JPanel {
 
     private static final int MAX_NUM = 10;
-    private int num1, num2, resultat;
+    private int num1, num2, resultat; 
     private final String[] op = {"+", "-"};
     private final String[] op2 = {"+", "-", "x"};
     private String signe;
     private int nombreQuestion = 0;
+  //  private int bonneReponse = 0;
     JLabel operation;
     JPanel panel;
     JPanel allPanel;
@@ -51,8 +52,8 @@ public class Calcul extends JPanel {
         JLabel correction = new JLabel("", SwingConstants.CENTER);
 
         panel = new JPanel(new GridBagLayout());
-        panel.setOpaque(false);
-      //  panel.setBackground(Color.green);
+        panel.setOpaque(false);//fait en sorte de voir le fond d'écran
+      
         panel.setPreferredSize(new Dimension(1300, 650));
 
         //Déclaration des variables
@@ -78,7 +79,7 @@ public class Calcul extends JPanel {
 //***********************************************************************************************************
 //***********************************************************************************************************
         //calcul
-        operation.setFont(new Font("Serif", Font.PLAIN, 38));
+        operation.setFont(new Font("Serif", Font.ITALIC, 38));
         tailleCase.fill = GridBagConstraints.BOTH;
         tailleCase.gridwidth = 1;
         tailleCase.gridheight = 1;
@@ -89,7 +90,7 @@ public class Calcul extends JPanel {
 //***********************************************************************************************************
 //***********************************************************************************************************
 // verification
-        correction.setFont(new Font("Serif", Font.PLAIN, 30));
+        correction.setFont(new Font("Serif", Font.ITALIC, 30));
         tailleCase.fill = GridBagConstraints.BOTH;
         tailleCase.gridwidth = 1;
         tailleCase.gridheight = 1;
@@ -101,6 +102,7 @@ public class Calcul extends JPanel {
 //***********************************************************************************************************
 // reponse
         JTextField rep = new JTextField();
+        
         rep.setFont(new Font("Serif", Font.PLAIN, 20));
         rep.setHorizontalAlignment(JTextField.CENTER);
         rep.requestFocus();
@@ -119,7 +121,7 @@ public class Calcul extends JPanel {
         tailleCase.gridwidth = 1;
         tailleCase.gridheight = 1;
         tailleCase.gridx = 1;
-        tailleCase.gridy = 8;
+        tailleCase.gridy = 7;
         panel.add(solu, tailleCase);
         solu.addActionListener(new ActionListener() {
             @Override
@@ -136,7 +138,7 @@ public class Calcul extends JPanel {
         tailleCase.gridwidth = 1;
         tailleCase.gridheight = 1;
         tailleCase.gridx = 1;
-        tailleCase.gridy = 10;
+        tailleCase.gridy = 8;
         panel.add(niveau1, tailleCase);
         niveau1.addActionListener(new ActionListener() {
             @Override
@@ -148,6 +150,7 @@ public class Calcul extends JPanel {
                 operation.setText(num1 + signe + num2);
                 correction.setText(null);
                 rep.setText(null);
+               
             }
         });
         JButton niveau2 = new JButton("Autre Calcul Niveau 2");
@@ -155,7 +158,7 @@ public class Calcul extends JPanel {
         tailleCase.gridwidth = 1;
         tailleCase.gridheight = 1;
         tailleCase.gridx = 1;
-        tailleCase.gridy = 12;
+        tailleCase.gridy = 11;
         panel.add(niveau2, tailleCase);
         niveau2.addActionListener(new ActionListener() {
             @Override
@@ -167,8 +170,25 @@ public class Calcul extends JPanel {
                 operation.setText(num1 + signe + num2);
                 correction.setText(null);
                 rep.setText(null);
+               
             }
         });
+        
+        JButton quitter = new JButton("Quitter");
+        tailleCase.fill = GridBagConstraints.ABOVE_BASELINE;
+        tailleCase.gridwidth = 1;
+        tailleCase.gridheight = 1;
+        tailleCase.gridx = 1;
+        tailleCase.gridy = 12;
+        panel.add(quitter, tailleCase);
+        quitter.addActionListener(new ActionListener() {
+            @Override
+                    public void actionPerformed(ActionEvent ae) {
+           Onglets onglet = new Onglets();
+               
+            }
+        });
+
 
 //***********************************************************************************************************
 //***********************************************************************************************************
@@ -183,25 +203,29 @@ public class Calcul extends JPanel {
         verif.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Result();
-                Result2();
+           //     Result();
+           //     Result2();
 
                 if (rep.getText().equals(String.valueOf(resultat))) {
-                    nombreQuestion++;
+                   
                     correction.setForeground(Color.green);
                     correction.setText("Bonne Réponse!!!");
                     rep.setText("");
+                    nombreQuestion ++;
+                //    bonneReponse ++;
 
                     rep.requestFocus();
                     if (nombreQuestion == 5) {
+ //                       System.out.println(bonneReponse);
 //                        System.exit(0);
-                        Onglets onglet = new Onglets();
+//                        Onglets onglet = new Onglets();
                     }
                 } else {
                     correction.setForeground(Color.red);
                     correction.setText("Dommage: Mauvaise Réponse!");
                     rep.setText("");
                     rep.requestFocus();
+                    nombreQuestion ++;
                 }
             }
         });
