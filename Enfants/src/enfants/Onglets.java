@@ -1,5 +1,7 @@
 package enfants;
 
+import Beans.Admin;
+import DAO.DAOAdministration;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,7 +11,9 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -197,9 +201,12 @@ public class Onglets extends JFrame {
         boutonAdmin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String pwd = "coucou";
+                //utilisation DAO pour la page administration
+                DAOAdministration daoad = new DAOAdministration();
+                Admin admi = daoad.find(1);
                 String mypwd = String.valueOf(textField.getPassword());
-                if (mypwd.equals(pwd)) {
+                if (encryptThisString(mypwd).equals(admi.getPass())) { // comparaison du mot de passe user et celui en bdd
+                    //si ok acces page admin
                     admin.remove(boutonAdmin);
                     admin.remove(textField);
                     admin.remove(label);
@@ -219,5 +226,28 @@ public class Onglets extends JFrame {
         jf.setBackground(Color.WHITE);
         jf.setVisible(true);
     }
-    
+
+    public static String encryptThisString(String input) {
+        try {
+            // getInstance() method is called with algorithm SHA-1
+            MessageDigest md = MessageDigest.getInstance("SHA-1");
+            // digest() method is called
+            // to calculate message digest of the input string
+            // returned as array of byte
+            byte[] messageDigest = md.digest(input.getBytes());
+            // Convert byte array into signum representation
+            BigInteger no = new BigInteger(1, messageDigest);
+            // Convert message digest into hex value
+            String hashtext = no.toString(16);
+            // Add preceding 0s to make it 32 bit
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            // return the HashText
+            return hashtext;
+        } // For specifying wrong message digest algorithms
+        catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
