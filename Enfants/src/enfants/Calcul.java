@@ -53,8 +53,8 @@ public class Calcul extends JPanel {
 
         panel = new JPanel(new GridBagLayout());
         panel.setOpaque(false);
-//        panel.setBackground(Color.green);
-        panel.setPreferredSize(new Dimension(500, 600));
+      //  panel.setBackground(Color.green);
+        panel.setPreferredSize(new Dimension(1300, 650));
 
         //Déclaration des variables
         num1 = rm.nextInt(MAX_NUM);
@@ -66,11 +66,11 @@ public class Calcul extends JPanel {
 //***********************************************************************************************************
         //titre
         JLabel reponse = new JLabel("CALCUL MENTAL", SwingConstants.CENTER);
-        reponse.setFont(new Font("Serif", Font.PLAIN, 40));
+        reponse.setFont(new Font("Serif", Font.ITALIC, 40));
         GridBagConstraints tailleCase = new GridBagConstraints();
         tailleCase.fill = GridBagConstraints.BOTH;
-        tailleCase.weightx = 0.5;
-        tailleCase.weighty = 0.5;
+        tailleCase.weightx = 1;
+        tailleCase.weighty = 1;
         tailleCase.gridwidth = 1;
         tailleCase.gridheight = 1;
         tailleCase.gridx = 1;
@@ -108,7 +108,7 @@ public class Calcul extends JPanel {
         tailleCase.gridwidth = 1;
         tailleCase.gridheight = 1;
         tailleCase.gridx = 1;
-        tailleCase.gridy = 5;
+        tailleCase.gridy = 4;
         panel.add(rep, tailleCase);
 
 //***********************************************************************************************************
