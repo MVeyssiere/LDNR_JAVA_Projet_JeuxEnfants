@@ -2,6 +2,9 @@ package enfants;
 
 import Beans.Question;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -11,7 +14,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -24,8 +26,10 @@ public class Visuel extends JPanel {
 
     QuestionNiveauUn questionNiveauUn = new QuestionNiveauUn();
     QuestionNiveauDeux questionNiveauDeux = new QuestionNiveauDeux();
-    int niveauSelec = 1;
+    private int niveauSelec = 1;
+    public int score = 0;
     JPanel global;
+    JPanel fin;
     JTextField rep;
     JLabel soluce;
     JLabel question;
@@ -40,16 +44,20 @@ public class Visuel extends JPanel {
                 super.paintComponent(g);
                 ImageIcon m = new ImageIcon(getClass().getResource("/Ressource/fond_jeu2.jpg"));
                 Image monImage = m.getImage();
-                g.drawImage(monImage, 0, 0, 1390, 600, null);
+                g.drawImage(monImage, 0, 0, 1390, 800, null);
             }
         };
+
         initGUI();
-////         global.setPreferredSize(new Dimension(600,330));
+
+        panel.setPreferredSize(new Dimension(1390, 800));
+
         panel.add(global);
         this.add(panel);
     }
 
     private void initGUI() {
+
         JPanel bouton = new JPanel();
         JPanel reponse = new JPanel();
         this.soluce = new JLabel();
@@ -71,13 +79,13 @@ public class Visuel extends JPanel {
 
         // bouton qui modifie le niveau
         JButton niv1 = new JButton("niveau 1");
+// action listener qui va modifier le niveau des questions
 
         niv1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
-                niveauSelec = 1;
-                Question f = questionNiveauUn.Triniveauun();
-                Afficher(f);
+
+                setNiveauSelec(1);
 
             }
         });
@@ -85,10 +93,22 @@ public class Visuel extends JPanel {
         niv2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
-                niveauSelec = 2;
-                Question f = questionNiveauDeux.triNivDeux();
-                Afficher(f);
 
+                setNiveauSelec(2);
+
+            }
+        });
+        // Initialisation du boutton quitter
+        // pour quitter la page question
+        JButton quitter = new JButton("Quitter");
+        quitter.setBackground(Color.lightGray);
+        quitter.setFont(new Font("New Times Roman", Font.BOLD, 16));
+        quitter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                Onglets onglet = new Onglets();
+//                QuitterPage();
             }
         });
         niveau.add(niv1);
@@ -103,22 +123,36 @@ public class Visuel extends JPanel {
         // ajout de la question et de la réponse en notre composant
         content.add(question);
         content.add(reponse);
+
+        int level = getNiveauSelec();
+        triNiveau(level);
+        System.out.println("level = " + level);
         // ajout des listener pour chaque bouton
+// action listener du bouton verifier
         verifier.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Verifier();
             }
         });
+// action listener du bouton solution
 
         solution.addActionListener((ActionEvent e) -> {
             Solution();
         });
-
+// action listener du bouton autre question
         autre.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 AutreQuestion();
+                // permet l'affichage du score des que c'est la fin des questions
+                if ((questionNiveauUn.FindesQuestions() || questionNiveauDeux.FindesQuestionsDeux()) == true) {
+
+                    JLabel info = new JLabel("votre score est de " + score);
+                    global.remove(cont);
+                    global.add(info);
+
+                }
             }
         });
         //ajout des bouton au panel regroupant les boutons
@@ -128,11 +162,14 @@ public class Visuel extends JPanel {
         cont.add(content);
         cont.add(bouton);
         cont.add(niveau);
-        // ajout des différents panel au panel général
 
+        // ajout des différents panel au panel général
+        global.add(quitter, BorderLayout.NORTH);
         global.add(cont, BorderLayout.CENTER);
+
     }
 
+    // permet de transformer les caractères spéciaux
     public static final String clean(String toClean) {
         return toClean.replaceAll("[éèêë]", "e")
                 .replaceAll("[ÉÈÊË]", "E")
@@ -154,7 +191,8 @@ public class Visuel extends JPanel {
                 .replaceAll("Ç", "C");
     }
 
-    public void Verifier() {
+// fonction qui permet de verifier si la reponse du textfield correspond à celle de la base de données
+    public int Verifier() {
 
         String verif = rep.getText();
         String reponsedb = f.getReponse();
@@ -172,32 +210,42 @@ public class Visuel extends JPanel {
 
         if (verif.equals(repo)) {
             soluce.setText("Bien Joué !!!! " + f.getReponse());
+            score = score + 1;
+            System.out.println("score = " + score);
 
         } else {
             soluce.setText("Quel dommage !!!!  la solution était " + f.getReponse());
+            System.out.println("score = " + score);
         }
+        return score;
     }
 
+    // Affiche dans le label reponse la solution a la question
     public void Solution() {
         String reponsedb = f.getReponse();
         soluce.setText("T'aurais pu repondre la réponse était " + reponsedb);
     }
 
+    // Rempli le label correspondant a la question
     public void Afficher(Question f) {
         String quest = f.getQuestion();
-        System.out.println("quest = " + quest);
         question.setText(quest);
     }
 
+    //Fonction qui va nettoyer les différents champs
     public void Nettoyer() {
         soluce.setText(null);
         rep.setText(null);
         question.setText(null);
     }
 
+    //Fonction qui va tirer une question
     public void AutreQuestion() {
         Nettoyer();
-        switch (niveauSelec) {
+        int le;
+        le = getNiveauSelec();
+        System.out.println("le = " + le);
+        switch (le) {
             case 1:
                 f = questionNiveauUn.Triniveauun();
                 Afficher(f);
@@ -209,6 +257,7 @@ public class Visuel extends JPanel {
         }
     }
 
+    //Fonction de vérification si la saisie ou la reponse sont des nombres
     public static boolean isANumber(String chaine) {
         try {
             Integer.parseInt(chaine);
@@ -217,4 +266,33 @@ public class Visuel extends JPanel {
             return false;
         }
     }
+    //fonction qui devait permettre de revenir au menu principal
+//    public boolean QuitterPage(){
+//        return true;
+
+//    }
+    //Fonction qui va selon le niveau afficher la premiere question
+    public void triNiveau(int niv) {
+        switch (niveauSelec) {
+            case 1:
+                f = questionNiveauUn.Triniveauun();
+                Afficher(f);
+
+                break;
+            case 2:
+                f = questionNiveauDeux.triNivDeux();
+                Afficher(f);
+                break;
+        }
+
+    }
+
+    public int getNiveauSelec() {
+        return niveauSelec;
+    }
+
+    public void setNiveauSelec(int niveauSelec) {
+        this.niveauSelec = niveauSelec;
+    }
+
 }
