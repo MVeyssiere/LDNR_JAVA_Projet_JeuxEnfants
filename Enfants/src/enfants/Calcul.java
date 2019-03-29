@@ -90,18 +90,19 @@ public class Calcul extends JPanel {
 //***********************************************************************************************************
 //***********************************************************************************************************
 // verification
-        correction.setFont(new Font("Serif", Font.PLAIN, 20));
+        correction.setFont(new Font("Serif", Font.PLAIN, 30));
         tailleCase.fill = GridBagConstraints.BOTH;
         tailleCase.gridwidth = 1;
         tailleCase.gridheight = 1;
         tailleCase.gridx = 1;
-        tailleCase.gridy = 4;
+        tailleCase.gridy = 3;
         panel.add(correction, tailleCase);
 
 //***********************************************************************************************************
 //***********************************************************************************************************
 // reponse
         JTextField rep = new JTextField();
+        rep.setFont(new Font("Serif", Font.PLAIN, 20));
         rep.setHorizontalAlignment(JTextField.CENTER);
         rep.requestFocus();
         tailleCase.fill = GridBagConstraints.BOTH;
@@ -194,7 +195,8 @@ public class Calcul extends JPanel {
 
                     rep.requestFocus();
                     if (nombreQuestion == 5) {
-                        System.exit(0);
+//                        System.exit(0);
+                        Onglets onglet = new Onglets();
                     }
                 } else {
                     correction.setForeground(Color.red);
